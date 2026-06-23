@@ -1,0 +1,6 @@
+# robots.txt for Coolify Dashboard
+User-agent: *
+Allow: /
+
+# Disallow crawling of API endpoints
+Disallow: /api/

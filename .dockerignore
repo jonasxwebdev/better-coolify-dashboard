@@ -1,0 +1,54 @@
+# Dependencies
+node_modules
+client/node_modules
+server/node_modules
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment files
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+client/.env
+server/.env
+
+# Build outputs
+dist
+build
+client/dist
+
+# Git
+.git
+.gitignore
+.gitattributes
+.github
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Documentation (keep README for Docker Hub)
+*.md
+!README.md
+
+# Test
+coverage
+.nyc_output
+*.test.js
+*.spec.js
+
+# Misc
+.editorconfig
+.prettierrc
+.eslintrc*
+

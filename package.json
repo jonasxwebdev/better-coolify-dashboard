@@ -1,0 +1,35 @@
+{
+  "name": "better-coolify-dashboard",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "A modern, production-ready dashboard for monitoring Coolify apps, services, and databases.",
+  "author": "Burak Kalaycı",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kalayciburak/coolify-dashboard.git"
+  },
+  "workspaces": [
+    "client",
+    "server"
+  ],
+  "scripts": {
+    "dev": "npm run dev -w client & npm run dev -w server",
+    "dev:client": "npm run dev -w client",
+    "dev:server": "npm run dev -w server",
+    "build": "npm run build -w client",
+    "build:all": "npm run build -w client && npm run build -w server",
+    "start": "npm run start -w server",
+    "lint": "npm run lint -w client && npm run lint -w server",
+    "lint:fix": "npm run lint:fix -w client",
+    "format": "npm run format -w client",
+    "format:check": "npm run format:check -w client",
+    "docker:build": "docker build -t coolify-dashboard .",
+    "docker:build:hub": "docker build -t torukobyte/coolify-dashboard:latest .",
+    "docker:run": "docker run -d -p 5000:5000 --env-file .env --env-file server/.env coolify-dashboard"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
