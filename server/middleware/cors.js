@@ -1,7 +1,9 @@
 import cors from "cors";
 
 const allowedOrigins = process.env.ALLOWED_ORIGINS
-  ? process.env.ALLOWED_ORIGINS.split(",").map((origin) => origin.trim())
+  ? process.env.ALLOWED_ORIGINS.split(",")
+      .map((origin) => origin.trim().replace(/\/+$/, ""))
+      .filter(Boolean)
   : ["http://localhost:5173"];
 
 const escapeRegex = (value) => value.replace(/[.+?^${}()|[\]\\]/g, "\\$&");
@@ -18,16 +20,37 @@ const allowedOriginMatchers = allowedOrigins.map((origin) => ({
   wildcard: wildcardToRegex(origin),
 }));
 
-const isOriginAllowed = (origin) =>
+const normalizeOrigin = (origin) => origin.replace(/\/+$/, "");
+
+const isConfiguredOriginAllowed = (origin) =>
   allowedOriginMatchers.some((matcher) =>
     matcher.wildcard ? matcher.wildcard.test(origin) : matcher.origin === origin
   );
 
-export const corsMiddleware = cors({
-  origin: function (origin, callback) {
-    if (!origin) return callback(null, true);
-    if (isOriginAllowed(origin)) return callback(null, true);
-    return callback(new Error("CROSS ORIGIN hatası"));
-  },
-  credentials: true,
-});
+const isSameHostOrigin = (origin, req) => {
+  try {
+    const requestHost = req.get("host");
+    const originUrl = new URL(origin);
+    return Boolean(requestHost && originUrl.host === requestHost);
+  } catch {
+    return false;
+  }
+};
+
+export const corsMiddleware = (req, res, next) =>
+  cors({
+    origin: function (origin, callback) {
+      if (!origin) return callback(null, true);
+
+      const normalizedOrigin = normalizeOrigin(origin);
+      if (
+        isSameHostOrigin(normalizedOrigin, req) ||
+        isConfiguredOriginAllowed(normalizedOrigin)
+      ) {
+        return callback(null, true);
+      }
+
+      return callback(new Error("CROSS ORIGIN hatası"));
+    },
+    credentials: true,
+  })(req, res, next);
