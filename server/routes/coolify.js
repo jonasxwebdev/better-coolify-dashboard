@@ -5,14 +5,23 @@ import {
   createResourceRouter,
   RESOURCE_CONFIGS,
 } from "../factories/ResourceRouterFactory.js";
-import {
-  fetchCurrentMetricsForServers,
-  fetchCurrentServerMetrics,
-  sanitizeServer,
-} from "../services/SentinelMetricsService.js";
 
 const router = express.Router();
 const coolify = getCoolifyClient();
+
+const sanitizeServer = (server) => {
+  const { settings, ...safeServer } = server;
+
+  return {
+    ...safeServer,
+    settings: settings
+      ? {
+          is_reachable: Boolean(settings.is_reachable),
+          is_usable: Boolean(settings.is_usable),
+        }
+      : null,
+  };
+};
 
 // Generic CRUD routers per resource type (factory pattern)
 router.use(
@@ -31,33 +40,6 @@ router.get("/servers", verifyToken, async (req, res, next) => {
     next(error);
   }
 });
-
-// Read-only: current Sentinel metrics keyed by Coolify server UUID.
-router.get("/servers/metrics/current", verifyToken, async (req, res, next) => {
-  try {
-    const servers = await coolify.get("/servers");
-    const metrics = await fetchCurrentMetricsForServers(
-      Array.isArray(servers) ? servers : [],
-    );
-    res.json(metrics);
-  } catch (error) {
-    next(error);
-  }
-});
-
-router.get(
-  "/servers/:uuid/metrics/current",
-  verifyToken,
-  async (req, res, next) => {
-    try {
-      const server = await coolify.get(`/servers/${req.params.uuid}`);
-      const metrics = await fetchCurrentServerMetrics(server);
-      res.json(metrics);
-    } catch (error) {
-      next(error);
-    }
-  },
-);
 
 // Read-only: list currently-running deployments (for live "deploying" badge)
 router.get("/deployments", verifyToken, async (req, res, next) => {

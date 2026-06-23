@@ -11,14 +11,11 @@ const useDashboardState = () => {
     services: storeServices,
     databases: storeDatabases,
     servers,
-    serverMetrics,
-    serverMetricsError,
     deployments,
     loading,
     error,
     fetchResources,
     fetchServers,
-    fetchServerMetrics,
     fetchDeployments,
     cleanup,
   } = useResourceStore();
@@ -31,19 +28,11 @@ const useDashboardState = () => {
   const [isInitialLoad, setIsInitialLoad] = useState(true);
 
   useEffect(() => {
-    Promise.all([
-      fetchResources(),
-      fetchServers(),
-      fetchServerMetrics(),
-      fetchDeployments(),
-    ]).finally(() => setIsInitialLoad(false));
+    Promise.all([fetchResources(), fetchServers(), fetchDeployments()]).finally(
+      () => setIsInitialLoad(false)
+    );
 
-    const metricsInterval = setInterval(fetchServerMetrics, 15000);
-
-    return () => {
-      clearInterval(metricsInterval);
-      cleanup();
-    };
+    return () => cleanup();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -82,12 +71,7 @@ const useDashboardState = () => {
   const handleRefresh = async () => {
     setIsRefreshing(true);
     try {
-      await Promise.all([
-        fetchResources(),
-        fetchServers(),
-        fetchServerMetrics(),
-        fetchDeployments(),
-      ]);
+      await Promise.all([fetchResources(), fetchServers(), fetchDeployments()]);
     } finally {
       setTimeout(() => setIsRefreshing(false), 500);
     }
@@ -116,13 +100,11 @@ const useDashboardState = () => {
     isInitialLoad,
     loading,
     error,
-    serverMetricsError,
 
     applications,
     services,
     databases,
     servers,
-    serverMetrics,
     deployments,
     filteredResources,
 

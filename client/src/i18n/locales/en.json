@@ -53,20 +53,6 @@
     "loadingResources": "Loading resources...",
     "failedToLoad": "Failed to load resources"
   },
-  "serverMetrics": {
-    "title": "Server metrics",
-    "cpu": "CPU",
-    "memory": "RAM",
-    "live": "Live",
-    "current": "Current",
-    "loading": "Loading metrics...",
-    "disabled": "Metrics disabled",
-    "unconfigured": "Metrics endpoint not configured",
-    "tokenUnavailable": "Sentinel token unavailable",
-    "unavailable": "Metrics unavailable",
-    "reachable": "Reachable",
-    "limited": "Limited"
-  },
   "resourceCard": {
     "status": "Status",
     "domain": "Domain",

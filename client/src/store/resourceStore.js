@@ -8,11 +8,9 @@ const useResourceStore = create((set, get) => ({
   services: [],
   databases: [],
   servers: [],
-  serverMetrics: {},
   deployments: [],
   loading: false,
   error: null,
-  serverMetricsError: null,
   pollingIntervals: {},
   actionLoading: {},
 
@@ -52,15 +50,6 @@ const useResourceStore = create((set, get) => ({
       set({ servers: Array.isArray(servers) ? servers : [] });
     } catch {
       set({ servers: [] });
-    }
-  },
-
-  fetchServerMetrics: async () => {
-    try {
-      const serverMetrics = await resourceRepository.fetchServerMetrics();
-      set({ serverMetrics: serverMetrics || {}, serverMetricsError: null });
-    } catch (error) {
-      set({ serverMetricsError: error.message });
     }
   },
 

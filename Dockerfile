@@ -17,7 +17,6 @@ FROM node:20-alpine AS backend-builder
 WORKDIR /app
 
 RUN apk upgrade --no-cache && \
-    apk add --no-cache docker-cli && \
     npm install -g npm@latest
 
 COPY package*.json ./

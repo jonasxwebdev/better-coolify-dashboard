@@ -28,10 +28,6 @@ class ResourceRepository {
     return await this.client.get("/servers");
   }
 
-  async fetchServerMetrics() {
-    return await this.client.get("/servers/metrics/current");
-  }
-
   async fetchDeployments() {
     try {
       const data = await this.client.get("/deployments");
