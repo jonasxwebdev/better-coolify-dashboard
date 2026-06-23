@@ -65,6 +65,8 @@ ADMIN_PASSWORD=your_secure_password
 ADMIN_2FA_SECRET=your_2fa_secret_key
 JWT_SECRET=your_jwt_secret_key
 ALLOWED_ORIGINS=https://dashboard.kalayciburak.com.tr
+# For preview deployments, comma-separate exact origins and subdomain wildcards:
+# ALLOWED_ORIGINS=https://dashboard.kalayciburak.com.tr,https://*.better-dash.jrxmedia.de
 COOLIFY_BASE_URL=https://coolify.kalayciburak.com.tr
 COOLIFY_TOKEN=your_coolify_api_token
 DASHBOARD_USER_TYPE=admin
@@ -306,7 +308,7 @@ Scan the new QR code with your authenticator app.
 | `ADMIN_PASSWORD`      | Dashboard administrator password                                  | `secure_password`                       | Yes      | -            |
 | `ADMIN_2FA_SECRET`    | Two-Factor Authentication secret (Base32 encoded)                 | Generate using `npm run generate-2fa`   | Yes      | -            |
 | `JWT_SECRET`          | Secret key for JWT token generation                               | `random_secret_key`                     | Yes      | -            |
-| `ALLOWED_ORIGINS`     | CORS allowed origins (comma-separated for multiple)               | `https://dashboard.kalayciburak.com.tr` | Yes      | -            |
+| `ALLOWED_ORIGINS`     | CORS allowed origins (comma-separated; supports subdomain wildcards like `https://*.example.com`) | `https://dashboard.kalayciburak.com.tr` | Yes      | -            |
 | `COOLIFY_BASE_URL`    | Your Coolify instance base URL                                    | `https://coolify.kalayciburak.com.tr`   | Yes      | -            |
 | `COOLIFY_TOKEN`       | Coolify API token (read+read:sensitive for viewer, write for admin) | `your_api_token`                     | Yes      | -            |
 | `DASHBOARD_USER_TYPE` | User access level: `viewer` (read-only) or `admin` (full control) | `admin` or `viewer`                   | No       | `viewer`     |

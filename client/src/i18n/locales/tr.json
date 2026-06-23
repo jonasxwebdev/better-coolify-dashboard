@@ -230,5 +230,19 @@
     "serviceStopFailed": "Servis durdurulamadı",
     "serviceDeleted": "Servis başarıyla silindi",
     "serviceDeleteFailed": "Servis silinemedi"
+  },
+  "serverView": {
+    "resources": "kaynak",
+    "running": "çalışıyor",
+    "stopped": "durduruldu",
+    "deploying": "dağıtılıyor"
+  },
+  "deployment": {
+    "title": "Dağıtım / Çalışma",
+    "deploying": "dağıtılıyor…",
+    "commit": "Commit",
+    "onlineSince": "Çevrimiçi",
+    "lastRestart": "Son yeniden başlatma",
+    "restarts": "Yeniden başlatma"
   }
 }

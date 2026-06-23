@@ -230,5 +230,19 @@
     "serviceStopFailed": "Dienst konnte nicht gestoppt werden",
     "serviceDeleted": "Dienst erfolgreich gelöscht",
     "serviceDeleteFailed": "Dienst konnte nicht gelöscht werden"
+  },
+  "serverView": {
+    "resources": "Ressourcen",
+    "running": "laufen",
+    "stopped": "gestoppt",
+    "deploying": "Deployments"
+  },
+  "deployment": {
+    "title": "Deployment / Laufzeit",
+    "deploying": "wird deployt…",
+    "commit": "Commit",
+    "onlineSince": "Online seit",
+    "lastRestart": "Letzter Neustart",
+    "restarts": "Neustarts"
   }
 }

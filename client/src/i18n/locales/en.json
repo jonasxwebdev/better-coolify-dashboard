@@ -230,5 +230,19 @@
     "serviceStopFailed": "Failed to stop service",
     "serviceDeleted": "Service deleted successfully",
     "serviceDeleteFailed": "Failed to delete service"
+  },
+  "serverView": {
+    "resources": "resources",
+    "running": "running",
+    "stopped": "stopped",
+    "deploying": "deploying"
+  },
+  "deployment": {
+    "title": "Deployment / Runtime",
+    "deploying": "deploying…",
+    "commit": "Commit",
+    "onlineSince": "Online since",
+    "lastRestart": "Last restart",
+    "restarts": "Restarts"
   }
 }

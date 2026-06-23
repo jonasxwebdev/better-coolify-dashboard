@@ -2,29 +2,37 @@ import { useState, useEffect, useMemo } from "react";
 import useResourceStore from "../../../store/resourceStore";
 import {
   filterDashboardResources,
-  filterAndSortResources,
+  searchResources,
+  sortResources,
 } from "../../../services/resourceService";
+import { groupByServer } from "../../../services/serverGrouping";
 
 const useDashboardState = () => {
   const {
     applications: storeApplications,
     services: storeServices,
     databases: storeDatabases,
+    servers,
+    deployments,
     loading,
     error,
     fetchResources,
+    fetchServers,
+    fetchDeployments,
     cleanup,
   } = useResourceStore();
 
   const [searchTerm, setSearchTerm] = useState("");
-  const [activeView, setActiveView] = useState("applications");
   const [sortBy, setSortBy] = useState("name");
   const [sortOrder, setSortOrder] = useState("asc");
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [isInitialLoad, setIsInitialLoad] = useState(true);
 
   useEffect(() => {
-    fetchResources().finally(() => setIsInitialLoad(false));
+    Promise.all([fetchResources(), fetchServers(), fetchDeployments()]).finally(
+      () => setIsInitialLoad(false)
+    );
+
     return () => cleanup();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -49,22 +57,27 @@ const useDashboardState = () => {
     [applications, services, databases]
   );
 
-  const filteredResources = useMemo(
-    () =>
-      filterAndSortResources(
-        allResources,
-        activeView,
-        searchTerm,
-        sortBy,
-        sortOrder
-      ),
-    [allResources, activeView, searchTerm, sortBy, sortOrder]
+  // Search filters resources across all servers; sort runs before grouping so
+  // order is preserved within each type bucket (groupByServer filters, not sorts).
+  const searchedResources = useMemo(
+    () => searchResources(allResources, searchTerm),
+    [allResources, searchTerm]
+  );
+
+  const sortedResources = useMemo(
+    () => sortResources(searchedResources, sortBy, sortOrder),
+    [searchedResources, sortBy, sortOrder]
+  );
+
+  const serverGroups = useMemo(
+    () => groupByServer(sortedResources, servers, deployments),
+    [sortedResources, servers, deployments]
   );
 
   const handleRefresh = async () => {
     setIsRefreshing(true);
     try {
-      await fetchResources();
+      await Promise.all([fetchResources(), fetchServers(), fetchDeployments()]);
     } finally {
       setTimeout(() => setIsRefreshing(false), 500);
     }
@@ -86,7 +99,6 @@ const useDashboardState = () => {
 
   return {
     searchTerm,
-    activeView,
     sortBy,
     sortOrder,
     isRefreshing,
@@ -94,10 +106,7 @@ const useDashboardState = () => {
     loading,
     error,
 
-    applications,
-    services,
-    databases,
-    filteredResources,
+    serverGroups,
 
     resourceCounts: {
       applications: applications.length,
@@ -106,7 +115,6 @@ const useDashboardState = () => {
     },
 
     setSearchTerm,
-    setActiveView,
     setSortBy,
     setSortOrder,
     handleRefresh,
