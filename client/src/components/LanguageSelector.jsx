@@ -2,36 +2,40 @@ import { useTranslation } from "react-i18next";
 import { useSoundEffects } from "../hooks/useSoundEffects";
 import { SOUND_TYPES } from "../utils/soundUtils";
 
+const LANGUAGES = [
+  { code: "en", flag: "/EN.svg", label: "English" },
+  { code: "de", flag: "/DE.svg", label: "Deutsch" },
+  { code: "tr", flag: "/TR.svg", label: "Türkçe" },
+];
+
 const LanguageSelector = () => {
   const { i18n } = useTranslation();
   const { playSound } = useSoundEffects();
 
-  const changeLanguage = () => {
+  const currentIndex = Math.max(
+    0,
+    LANGUAGES.findIndex((lang) => lang.code === i18n.language)
+  );
+  const current = LANGUAGES[currentIndex];
+  const next = LANGUAGES[(currentIndex + 1) % LANGUAGES.length];
+
+  const cycleLanguage = () => {
     playSound(SOUND_TYPES.CLICK);
-    const nextLanguage = i18n.language === "tr" ? "en" : "tr";
-    i18n.changeLanguage(nextLanguage);
-    localStorage.setItem("language", nextLanguage);
+    i18n.changeLanguage(next.code);
+    localStorage.setItem("language", next.code);
   };
 
-  const isTurkish = i18n.language === "tr";
-
   return (
-    <div className="switch">
-      <input
-        id="language-toggle"
-        className="check-toggle check-toggle-round-flat"
-        type="checkbox"
-        checked={isTurkish}
-        onChange={changeLanguage}
-      />
-      <label htmlFor="language-toggle"></label>
-      <span className="on circle-text">
-        <img src="/EN.svg" alt="EN" />
-      </span>
-      <span className="off circle-text">
-        <img src="/TR.svg" alt="TR" />
-      </span>
-    </div>
+    <button
+      type="button"
+      className="language-toggle"
+      onClick={cycleLanguage}
+      title={`${current.label} → ${next.label}`}
+      aria-label={`${current.label} (switch to ${next.label})`}
+    >
+      <img src={current.flag} alt={current.label} />
+      <span className="language-toggle-code">{current.code.toUpperCase()}</span>
+    </button>
   );
 };
 

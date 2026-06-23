@@ -125,7 +125,8 @@
   "language": {
     "select": "Dil Seçin",
     "turkish": "Türkçe",
-    "english": "English"
+    "english": "English",
+    "german": "Deutsch"
   },
   "settings": {
     "title": "Ayarlar",
