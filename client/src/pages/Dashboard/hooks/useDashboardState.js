@@ -13,11 +13,13 @@ const useDashboardState = () => {
     servers,
     serverMetrics,
     serverMetricsError,
+    deployments,
     loading,
     error,
     fetchResources,
     fetchServers,
     fetchServerMetrics,
+    fetchDeployments,
     cleanup,
   } = useResourceStore();
 
@@ -33,6 +35,7 @@ const useDashboardState = () => {
       fetchResources(),
       fetchServers(),
       fetchServerMetrics(),
+      fetchDeployments(),
     ]).finally(() => setIsInitialLoad(false));
 
     const metricsInterval = setInterval(fetchServerMetrics, 15000);
@@ -83,6 +86,7 @@ const useDashboardState = () => {
         fetchResources(),
         fetchServers(),
         fetchServerMetrics(),
+        fetchDeployments(),
       ]);
     } finally {
       setTimeout(() => setIsRefreshing(false), 500);
@@ -119,6 +123,7 @@ const useDashboardState = () => {
     databases,
     servers,
     serverMetrics,
+    deployments,
     filteredResources,
 
     resourceCounts: {

@@ -9,6 +9,7 @@ const useResourceStore = create((set, get) => ({
   databases: [],
   servers: [],
   serverMetrics: {},
+  deployments: [],
   loading: false,
   error: null,
   serverMetricsError: null,
@@ -61,6 +62,11 @@ const useResourceStore = create((set, get) => ({
     } catch (error) {
       set({ serverMetricsError: error.message });
     }
+  },
+
+  fetchDeployments: async () => {
+    const deployments = await resourceRepository.fetchDeployments();
+    set({ deployments: Array.isArray(deployments) ? deployments : [] });
   },
 
   updateResourceStatus: (type, uuid, newStatus) => {

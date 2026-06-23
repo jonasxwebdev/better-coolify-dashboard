@@ -32,6 +32,16 @@ class ResourceRepository {
     return await this.client.get("/servers/metrics/current");
   }
 
+  async fetchDeployments() {
+    try {
+      const data = await this.client.get("/deployments");
+      return data || [];
+    } catch (error) {
+      console.warn("Failed to fetch deployments:", error);
+      return [];
+    }
+  }
+
   async fetchApplications() {
     const data = await this.client.get("/applications");
     return data.map(mapApplication);
