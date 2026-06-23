@@ -53,6 +53,20 @@
     "loadingResources": "Kaynaklar yükleniyor...",
     "failedToLoad": "Kaynaklar yüklenirken hata oluştu"
   },
+  "serverMetrics": {
+    "title": "Sunucu metrikleri",
+    "cpu": "CPU",
+    "memory": "RAM",
+    "live": "Canlı",
+    "current": "Güncel",
+    "loading": "Metrikler yükleniyor...",
+    "disabled": "Metrikler devre dışı",
+    "unconfigured": "Metrik endpoint'i yapılandırılmamış",
+    "tokenUnavailable": "Sentinel token mevcut değil",
+    "unavailable": "Metrikler mevcut değil",
+    "reachable": "Erişilebilir",
+    "limited": "Sınırlı"
+  },
   "resourceCard": {
     "status": "Durum",
     "domain": "Domain",

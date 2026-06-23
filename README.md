@@ -68,6 +68,8 @@ ALLOWED_ORIGINS=https://dashboard.kalayciburak.com.tr
 COOLIFY_BASE_URL=https://coolify.kalayciburak.com.tr
 COOLIFY_TOKEN=your_coolify_api_token
 DASHBOARD_USER_TYPE=admin
+# Optional, only if Sentinel is reachable from this dashboard backend:
+# SENTINEL_BASE_URL_TEMPLATE=http://{ip}:8888
 ```
 
 ### Step 4: Generate 2FA Secret
@@ -310,6 +312,8 @@ Scan the new QR code with your authenticator app.
 | `COOLIFY_BASE_URL`    | Your Coolify instance base URL                                    | `https://coolify.kalayciburak.com.tr`   | Yes      | -            |
 | `COOLIFY_TOKEN`       | Coolify API token (read+read:sensitive for viewer, write for admin) | `your_api_token`                     | Yes      | -            |
 | `DASHBOARD_USER_TYPE` | User access level: `viewer` (read-only) or `admin` (full control) | `admin` or `viewer`                   | No       | `viewer`     |
+| `SENTINEL_BASE_URL`   | Single Sentinel base URL for live server metrics (backend-only)    | `http://10.0.0.5:8888`                  | No       | -            |
+| `SENTINEL_BASE_URL_TEMPLATE` | Sentinel base URL template for multiple servers. Supports `{uuid}`, `{ip}`, `{name}`, `{port}`. Use only on a private network or behind strict access control. | `http://{ip}:8888` | No | - |
 | `NODE_ENV`            | Environment mode: `development` disables 2FA for easier testing   | `development` or `production`           | No       | `production` |
 
 ---

@@ -24,6 +24,14 @@ class ResourceRepository {
     ];
   }
 
+  async fetchServers() {
+    return await this.client.get("/servers");
+  }
+
+  async fetchServerMetrics() {
+    return await this.client.get("/servers/metrics/current");
+  }
+
   async fetchApplications() {
     const data = await this.client.get("/applications");
     return data.map(mapApplication);

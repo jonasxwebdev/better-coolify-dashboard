@@ -1,3 +1,4 @@
+import { createElement } from "react";
 import { useTranslation } from "react-i18next";
 import {
   CubeIcon,
@@ -48,7 +49,7 @@ const ResourceTabs = ({
 
   return (
     <div className="flex gap-1.5 md:gap-2 w-full md:w-auto overflow-x-auto pb-2 md:pb-0">
-      {tabs.map(({ id, icon: Icon, label, shortLabel, count }) => (
+      {tabs.map(({ id, icon, label, shortLabel, count }) => (
         <button
           key={id}
           onClick={() => handleTabClick(id)}
@@ -58,7 +59,7 @@ const ResourceTabs = ({
               : "bg-secondary border-border text-muted-foreground hover:bg-accent hover:text-foreground"
           }`}
         >
-          <Icon className="w-4 h-4" />
+          {createElement(icon, { className: "w-4 h-4" })}
           <span className="hidden md:inline">{label}</span>
           <span className="md:hidden">{shortLabel}</span>
           <span className="text-xs md:text-sm">({count})</span>

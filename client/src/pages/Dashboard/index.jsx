@@ -9,6 +9,7 @@ import ThemeToggle from "../../components/ThemeToggle";
 import ResourceFilters from "./components/ResourceFilters";
 import ResourceList from "./components/ResourceList";
 import ResourceTabs from "./components/ResourceTabs";
+import ServerMetricsOverview from "./components/ServerMetricsOverview";
 import { SOUND_TYPES } from "../../utils/soundUtils";
 import { logout } from "../../api/auth";
 import toast from "react-hot-toast";
@@ -31,6 +32,8 @@ const Dashboard = () => {
     isInitialLoad,
     loading,
     error,
+    servers,
+    serverMetrics,
     filteredResources,
     resourceCounts,
     setSearchTerm,
@@ -118,6 +121,12 @@ const Dashboard = () => {
             </button>
           </div>
         )}
+
+        {/* Controls Section */}
+        <ServerMetricsOverview
+          servers={servers}
+          serverMetrics={serverMetrics}
+        />
 
         {/* Controls Section */}
         <div className="mb-4 md:mb-6">

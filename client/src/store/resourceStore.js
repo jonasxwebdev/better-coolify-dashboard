@@ -3,13 +3,15 @@ import toast from "react-hot-toast";
 import resourceRepository from "../repositories/ResourceRepository";
 import { RESOURCE_TYPES } from "../constants/resourceTypes";
 
-
 const useResourceStore = create((set, get) => ({
   applications: [],
   services: [],
   databases: [],
+  servers: [],
+  serverMetrics: {},
   loading: false,
   error: null,
+  serverMetricsError: null,
   pollingIntervals: {},
   actionLoading: {},
 
@@ -40,6 +42,24 @@ const useResourceStore = create((set, get) => ({
       });
     } catch (error) {
       set({ error: error.message, loading: false });
+    }
+  },
+
+  fetchServers: async () => {
+    try {
+      const servers = await resourceRepository.fetchServers();
+      set({ servers: Array.isArray(servers) ? servers : [] });
+    } catch {
+      set({ servers: [] });
+    }
+  },
+
+  fetchServerMetrics: async () => {
+    try {
+      const serverMetrics = await resourceRepository.fetchServerMetrics();
+      set({ serverMetrics: serverMetrics || {}, serverMetricsError: null });
+    } catch (error) {
+      set({ serverMetricsError: error.message });
     }
   },
 

@@ -53,6 +53,20 @@
     "loadingResources": "Ressourcen werden geladen...",
     "failedToLoad": "Ressourcen konnten nicht geladen werden"
   },
+  "serverMetrics": {
+    "title": "Server-Metriken",
+    "cpu": "CPU",
+    "memory": "RAM",
+    "live": "Live",
+    "current": "Aktuell",
+    "loading": "Metriken werden geladen...",
+    "disabled": "Metriken deaktiviert",
+    "unconfigured": "Metrics-Endpunkt nicht konfiguriert",
+    "tokenUnavailable": "Sentinel-Token nicht verfügbar",
+    "unavailable": "Metriken nicht verfügbar",
+    "reachable": "Erreichbar",
+    "limited": "Eingeschränkt"
+  },
   "resourceCard": {
     "status": "Status",
     "domain": "Domain",
