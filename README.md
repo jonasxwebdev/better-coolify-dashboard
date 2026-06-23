@@ -72,6 +72,9 @@ COOLIFY_TOKEN=your_coolify_api_token
 DASHBOARD_USER_TYPE=admin
 # Optional, only if Sentinel is reachable from this dashboard backend:
 # SENTINEL_BASE_URL_TEMPLATE=http://{ip}:8888
+# Optional single-host Coolify setup: query Coolify's local Sentinel container through Docker.
+# Requires mounting /var/run/docker.sock into this dashboard container.
+# SENTINEL_ACCESS_MODE=docker-exec
 ```
 
 ### Step 4: Generate 2FA Secret
@@ -316,6 +319,8 @@ Scan the new QR code with your authenticator app.
 | `DASHBOARD_USER_TYPE` | User access level: `viewer` (read-only) or `admin` (full control) | `admin` or `viewer`                   | No       | `viewer`     |
 | `SENTINEL_BASE_URL`   | Single Sentinel base URL for live server metrics (backend-only)    | `http://10.0.0.5:8888`                  | No       | -            |
 | `SENTINEL_BASE_URL_TEMPLATE` | Sentinel base URL template for multiple servers. Supports `{uuid}`, `{ip}`, `{name}`, `{port}`. Use only on a private network or behind strict access control. | `http://{ip}:8888` | No | - |
+| `SENTINEL_ACCESS_MODE` | Set to `docker-exec` to read metrics from a local `coolify-sentinel` container via Docker instead of HTTP. Requires Docker socket access. | `docker-exec` | No | `http` |
+| `SENTINEL_CONTAINER_NAME` | Sentinel container name for `docker-exec` mode | `coolify-sentinel` | No | `coolify-sentinel` |
 | `NODE_ENV`            | Environment mode: `development` disables 2FA for easier testing   | `development` or `production`           | No       | `production` |
 
 ---

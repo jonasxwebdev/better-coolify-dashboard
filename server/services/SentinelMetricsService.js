@@ -1,6 +1,9 @@
 import axios from "axios";
+import { execFile } from "child_process";
+import { promisify } from "util";
 
 const SENTINEL_TIMEOUT_MS = 5000;
+const execFileAsync = promisify(execFile);
 
 const metricClient = axios.create({
   timeout: SENTINEL_TIMEOUT_MS,
@@ -51,6 +54,16 @@ const getSentinelBaseUrl = (server) => {
   return singleServerUrl ? stripTrailingSlash(singleServerUrl) : null;
 };
 
+const getSentinelAccessMode = () =>
+  process.env.SENTINEL_ACCESS_MODE ||
+  process.env.COOLIFY_SENTINEL_ACCESS_MODE ||
+  "http";
+
+const getSentinelContainerName = () =>
+  process.env.SENTINEL_CONTAINER_NAME ||
+  process.env.COOLIFY_SENTINEL_CONTAINER_NAME ||
+  "coolify-sentinel";
+
 const buildSentinelUrl = (baseUrl, endpoint) => {
   const normalizedEndpoint = endpoint.startsWith("/")
     ? endpoint
@@ -61,6 +74,35 @@ const buildSentinelUrl = (baseUrl, endpoint) => {
   }
 
   return `${baseUrl}/api${normalizedEndpoint}`;
+};
+
+const parseJson = (value) => JSON.parse(value);
+
+const fetchViaDockerExec = async (endpoint, token) => {
+  const url = buildSentinelUrl("http://localhost:8888", endpoint);
+  const { stdout } = await execFileAsync(
+    "docker",
+    [
+      "exec",
+      getSentinelContainerName(),
+      "curl",
+      "-fsS",
+      "-H",
+      `Authorization: Bearer ${token}`,
+      url,
+    ],
+    { timeout: SENTINEL_TIMEOUT_MS },
+  );
+
+  return parseJson(stdout);
+};
+
+const fetchViaHttp = async (baseUrl, endpoint, token) => {
+  const response = await metricClient.get(buildSentinelUrl(baseUrl, endpoint), {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+
+  return response.data || {};
 };
 
 const unavailable = (server, status, message) => ({
@@ -111,25 +153,25 @@ export const fetchCurrentServerMetrics = async (server) => {
   }
 
   const baseUrl = getSentinelBaseUrl(server);
-  if (!baseUrl) {
+  const accessMode = getSentinelAccessMode();
+  if (!baseUrl && accessMode !== "docker-exec") {
     return unavailable(
       server,
       "unconfigured",
-      "Set SENTINEL_BASE_URL or SENTINEL_BASE_URL_TEMPLATE to read live metrics.",
+      "Set SENTINEL_BASE_URL, SENTINEL_BASE_URL_TEMPLATE, or SENTINEL_ACCESS_MODE=docker-exec to read live metrics.",
     );
   }
 
   try {
-    const headers = { Authorization: `Bearer ${token}` };
-    const [cpuResponse, memoryResponse] = await Promise.all([
-      metricClient.get(buildSentinelUrl(baseUrl, "/cpu/current"), { headers }),
-      metricClient.get(buildSentinelUrl(baseUrl, "/memory/current"), {
-        headers,
-      }),
-    ]);
+    const fetchMetric =
+      accessMode === "docker-exec"
+        ? (endpoint) => fetchViaDockerExec(endpoint, token)
+        : (endpoint) => fetchViaHttp(baseUrl, endpoint, token);
 
-    const cpu = cpuResponse.data || {};
-    const memory = memoryResponse.data || {};
+    const [cpu, memory] = await Promise.all([
+      fetchMetric("/cpu/current"),
+      fetchMetric("/memory/current"),
+    ]);
     const sampledAt = toIsoTime(cpu.time || memory.time);
 
     return {
@@ -150,7 +192,9 @@ export const fetchCurrentServerMetrics = async (server) => {
       "unavailable",
       error.response?.status === 401
         ? "Sentinel rejected the token."
-        : "Sentinel metrics are unavailable.",
+        : accessMode === "docker-exec"
+          ? "Sentinel metrics are unavailable via Docker exec."
+          : "Sentinel metrics are unavailable.",
     );
   }
 };
