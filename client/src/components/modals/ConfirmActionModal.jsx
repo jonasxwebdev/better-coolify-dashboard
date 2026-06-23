@@ -17,30 +17,30 @@ const ConfirmActionModal = ({ action, resourceName, onConfirm, onClose }) => {
   const actionConfig = {
     start: {
       icon: PlayIcon,
-      iconColor: "text-green-400",
-      iconBg: "bg-green-500/20",
-      confirmBg: "bg-green-600 hover:bg-green-700",
+      iconColor: "text-success",
+      iconBg: "bg-success/15",
+      confirmBg: "bg-primary hover:bg-primary/90 text-primary-foreground",
       message: t("admin.confirmStart", { name: resourceName }),
     },
     stop: {
       icon: StopIcon,
-      iconColor: "text-yellow-400",
-      iconBg: "bg-yellow-500/20",
-      confirmBg: "bg-yellow-600 hover:bg-yellow-700",
+      iconColor: "text-warning",
+      iconBg: "bg-warning/15",
+      confirmBg: "bg-primary hover:bg-primary/90 text-primary-foreground",
       message: t("admin.confirmStop", { name: resourceName }),
     },
     restart: {
       icon: ArrowPathIcon,
-      iconColor: "text-blue-400",
-      iconBg: "bg-blue-500/20",
-      confirmBg: "bg-blue-600 hover:bg-blue-700",
+      iconColor: "text-info",
+      iconBg: "bg-info/15",
+      confirmBg: "bg-primary hover:bg-primary/90 text-primary-foreground",
       message: t("admin.confirmRestart", { name: resourceName }),
     },
     delete: {
       icon: TrashIcon,
-      iconColor: "text-red-400",
-      iconBg: "bg-red-500/20",
-      confirmBg: "bg-red-600 hover:bg-red-700",
+      iconColor: "text-destructive",
+      iconBg: "bg-destructive/15",
+      confirmBg: "bg-destructive hover:bg-destructive/90 text-destructive-foreground",
       message: t("admin.confirmDelete", { name: resourceName }),
       isDestructive: true,
     },
@@ -78,11 +78,11 @@ const ConfirmActionModal = ({ action, resourceName, onConfirm, onClose }) => {
 
   return (
     <div
-      className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4"
+      className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4"
       onClick={handleClose}
     >
       <div
-        className="bg-[#1e1a3c] rounded-xl border border-white/10 max-w-md w-full"
+        className="bg-popover rounded-xl border border-border max-w-md w-full"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="p-6">
@@ -92,12 +92,12 @@ const ConfirmActionModal = ({ action, resourceName, onConfirm, onClose }) => {
             >
               <Icon className={`w-6 h-6 ${config.iconColor}`} />
             </div>
-            <h3 className="text-lg font-semibold text-white">
+            <h3 className="text-lg font-semibold text-foreground">
               {config.message}
             </h3>
           </div>
           {config.isDestructive && (
-            <div className="flex items-center gap-2 mb-4 text-sm text-red-300 bg-red-500/10 p-3 rounded-lg border border-red-500/20">
+            <div className="flex items-center gap-2 mb-4 text-sm text-destructive bg-destructive/10 p-3 rounded-md border border-destructive/20">
               <ExclamationTriangleIcon className="w-5 h-5 flex-shrink-0" />
               <span>{t("admin.deleteWarning")}</span>
             </div>
@@ -105,13 +105,13 @@ const ConfirmActionModal = ({ action, resourceName, onConfirm, onClose }) => {
           <div className="flex gap-3">
             <button
               onClick={handleClose}
-              className="flex-1 px-4 py-2.5 bg-white/5 hover:bg-white/10 text-white rounded-lg border border-white/10 transition font-medium cursor-pointer text-sm"
+              className="flex-1 px-4 py-2.5 bg-secondary hover:bg-accent text-secondary-foreground rounded-md border border-border transition-colors font-medium cursor-pointer text-sm"
             >
               {t("modals.cancel")}
             </button>
             <button
               onClick={handleConfirm}
-              className={`flex-1 px-4 py-2.5 ${config.confirmBg} text-white rounded-lg transition font-medium cursor-pointer text-sm`}
+              className={`flex-1 px-4 py-2.5 ${config.confirmBg} rounded-md transition-colors font-medium cursor-pointer text-sm`}
             >
               {t(`admin.${action}`)}
             </button>

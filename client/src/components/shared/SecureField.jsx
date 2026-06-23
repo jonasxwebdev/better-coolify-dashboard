@@ -38,17 +38,17 @@ const SecureField = ({
 
   return (
     <div className={`space-y-2 ${className}`}>
-      <label className="block text-sm font-medium text-slate-300">{label}</label>
+      <label className="block text-sm font-medium text-muted-foreground">{label}</label>
       <div className="flex items-center gap-2">
         {/* Value Display */}
-        <div className="flex-1 px-4 py-2 bg-slate-800/50 border border-white/10 rounded-lg font-mono text-sm text-slate-200 break-all">
+        <div className="flex-1 px-4 py-2 bg-secondary border border-border rounded-lg font-mono text-sm text-foreground break-all">
           {isVisible ? value : hideText}
         </div>
 
         {/* Toggle Visibility Button */}
         <button
           onClick={handleToggleVisibility}
-          className="p-2 bg-purple-500/20 hover:bg-purple-500/30 active:bg-purple-500/40 rounded-lg border border-purple-500/40 transition text-purple-200 cursor-pointer"
+          className="p-2 bg-secondary hover:bg-accent rounded-md border border-border transition-colors text-secondary-foreground cursor-pointer"
           title={isVisible ? t("common.hide") : t("common.show")}
         >
           {isVisible ? (
@@ -61,10 +61,10 @@ const SecureField = ({
         {/* Copy to Clipboard Button */}
         <button
           onClick={handleCopy}
-          className={`p-2 rounded-lg border transition cursor-pointer ${
+          className={`p-2 rounded-md border transition-colors cursor-pointer ${
             copied
-              ? "bg-green-500/20 border-green-500/40 text-green-200"
-              : "bg-indigo-500/20 hover:bg-indigo-500/30 active:bg-indigo-500/40 border-indigo-500/40 text-indigo-200"
+              ? "bg-success/15 border-success/30 text-success"
+              : "bg-secondary hover:bg-accent border-border text-secondary-foreground"
           }`}
           title={copied ? t("common.copied") : t("common.copy")}
         >

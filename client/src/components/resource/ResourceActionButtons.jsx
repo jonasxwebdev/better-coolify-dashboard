@@ -58,7 +58,7 @@ const ResourceActionButtons = ({ resource }) => {
   };
 
   const buttonClass =
-    "flex items-center gap-2 px-4 py-2.5 backdrop-blur-sm transition-all duration-200 rounded-lg border disabled:opacity-40 disabled:cursor-not-allowed font-medium text-sm cursor-pointer";
+    "flex items-center gap-2 px-4 py-2.5 transition-all duration-200 rounded-lg border disabled:opacity-40 disabled:cursor-not-allowed font-medium text-sm cursor-pointer";
 
   return (
     <>
@@ -66,10 +66,10 @@ const ResourceActionButtons = ({ resource }) => {
         <button
           onClick={() => setConfirmAction("start")}
           disabled={isRunning || isTransitioning || currentAction}
-          className={`${buttonClass} bg-green-500/20 hover:bg-green-500/30 border-green-500/40 hover:border-green-500/60 text-green-300 hover:text-green-100 hover:shadow-[0_0_20px_rgba(34,197,94,0.4)] disabled:hover:bg-green-500/20 disabled:hover:shadow-none`}
+          className={`${buttonClass} bg-success/15 hover:bg-success/25 border-success/30 hover:border-success/50 text-success hover:text-success disabled:hover:bg-success/25`}
         >
           {currentAction?.action === "starting" ? (
-            <div className="w-4 h-4 border-2 border-green-300 border-t-transparent rounded-full animate-spin" />
+            <div className="w-4 h-4 border-2 border-success border-t-transparent rounded-full animate-spin" />
           ) : (
             <PlayIcon className="w-4 h-4" />
           )}
@@ -83,10 +83,10 @@ const ResourceActionButtons = ({ resource }) => {
         <button
           onClick={() => setConfirmAction("stop")}
           disabled={isStopped || isTransitioning || currentAction}
-          className={`${buttonClass} bg-yellow-500/20 hover:bg-yellow-500/30 border-yellow-500/40 hover:border-yellow-500/60 text-yellow-300 hover:text-yellow-100 hover:shadow-[0_0_20px_rgba(234,179,8,0.4)] disabled:hover:bg-yellow-500/20 disabled:hover:shadow-none`}
+          className={`${buttonClass} bg-warning/15 hover:bg-warning/25 border-warning/30 hover:border-warning/50 text-warning hover:text-warning disabled:hover:bg-warning/25`}
         >
           {currentAction?.action === "stopping" ? (
-            <div className="w-4 h-4 border-2 border-yellow-300 border-t-transparent rounded-full animate-spin" />
+            <div className="w-4 h-4 border-2 border-warning border-t-transparent rounded-full animate-spin" />
           ) : (
             <StopIcon className="w-4 h-4" />
           )}
@@ -101,7 +101,7 @@ const ResourceActionButtons = ({ resource }) => {
           <button
             onClick={() => setShowLogs(true)}
             disabled={isStopped || isTransitioning}
-            className={`${buttonClass} bg-cyan-500/20 hover:bg-cyan-500/30 border-cyan-500/40 hover:border-cyan-500/60 text-cyan-300 hover:text-cyan-100 hover:shadow-[0_0_20px_rgba(6,182,212,0.4)] disabled:hover:bg-cyan-500/20 disabled:hover:shadow-none`}
+            className={`${buttonClass} bg-secondary hover:bg-accent border-border hover:border-border text-foreground hover:text-foreground disabled:hover:bg-accent`}
           >
             <DocumentMagnifyingGlassIcon className="w-4 h-4" />
             <span className="hidden md:inline">{t("admin.viewLogs")}</span>
@@ -111,10 +111,10 @@ const ResourceActionButtons = ({ resource }) => {
         <button
           onClick={() => setConfirmAction("delete")}
           disabled={isTransitioning || currentAction}
-          className={`${buttonClass} bg-red-500/20 hover:bg-red-500/30 border-red-500/40 hover:border-red-500/60 text-red-300 hover:text-red-100 hover:shadow-[0_0_20px_rgba(239,68,68,0.4)] disabled:hover:bg-red-500/20 disabled:hover:shadow-none`}
+          className={`${buttonClass} bg-destructive/15 hover:bg-destructive/25 border-destructive/30 hover:border-destructive/50 text-destructive hover:text-destructive disabled:hover:bg-destructive/25`}
         >
           {currentAction?.action === "deleting" ? (
-            <div className="w-4 h-4 border-2 border-red-300 border-t-transparent rounded-full animate-spin" />
+            <div className="w-4 h-4 border-2 border-destructive border-t-transparent rounded-full animate-spin" />
           ) : (
             <TrashIcon className="w-4 h-4" />
           )}

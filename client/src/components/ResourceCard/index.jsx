@@ -97,14 +97,14 @@ const ResourceCard = ({ resource }) => {
 
   return (
     <div
-      className={`border-b border-white/30 last:border-b-0 relative overflow-hidden transition-all duration-300 ${
-        isExpanded ? "bg-purple-500/5" : ""
+      className={`border-b border-border last:border-b-0 relative overflow-hidden transition-colors ${
+        isExpanded ? "bg-muted/30" : ""
       }`}
     >
       <div
-        className={`hover:bg-white/5 active:bg-white/10 transition-colors duration-150 ${
+        className={`hover:bg-accent/50 transition-colors duration-150 ${
           hasDetails ? "cursor-pointer" : ""
-        } ${isExpanded ? "bg-white/5" : "bg-white/1"}`}
+        } ${isExpanded ? "bg-muted/40" : ""}`}
         onClick={handleExpandToggle}
         title={hasDetails ? t("common.detail") : ""}
       >

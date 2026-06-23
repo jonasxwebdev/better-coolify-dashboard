@@ -38,13 +38,13 @@ const ResourceFilters = ({
       {/* Search Input */}
       <div className="flex-1 min-w-0">
         <div className="relative">
-          <MagnifyingGlassIcon className="w-4 h-4 md:w-5 md:h-5 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+          <MagnifyingGlassIcon className="w-4 h-4 md:w-5 md:h-5 absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
           <input
             type="text"
             placeholder={t("common.search")}
             value={searchTerm}
             onChange={(e) => onSearchChange(e.target.value)}
-            className="w-full pl-9 md:pl-10 pr-3 md:pr-4 py-1.5 bg-white/5 border border-white/10 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition text-sm"
+            className="w-full pl-9 md:pl-10 pr-3 md:pr-4 py-1.5 bg-input border border-border rounded-md text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-ring transition-colors text-sm"
           />
         </div>
       </div>
@@ -64,7 +64,7 @@ const ResourceFilters = ({
         {sortBy !== "name" && (
           <button
             onClick={handleClearSort}
-            className="flex items-center px-3 md:px-4 py-2 md:py-1.5 bg-red-500/30 border border-red-500/30 rounded-lg text-white hover:bg-red-500/50 active:bg-red-500/60 transition cursor-pointer touch-manipulation"
+            className="flex items-center px-3 md:px-4 py-2 md:py-1.5 bg-destructive/15 border border-destructive/30 rounded-md text-destructive hover:bg-destructive/25 transition-colors cursor-pointer touch-manipulation"
             title={t("common.filter")}
           >
             <XMarkIcon className="w-4 h-4 md:w-5 md:h-5" />
@@ -74,7 +74,7 @@ const ResourceFilters = ({
         {/* Sort Order Toggle */}
         <button
           onClick={handleSortOrderToggle}
-          className="flex items-center px-3 md:px-4 py-2 md:py-1.5 bg-white/5 border border-white/10 rounded-lg text-white text-sm hover:bg-white/10 active:bg-white/20 transition cursor-pointer touch-manipulation"
+          className="flex items-center px-3 md:px-4 py-2 md:py-1.5 bg-secondary border border-border rounded-md text-secondary-foreground text-sm hover:bg-accent transition-colors cursor-pointer touch-manipulation"
           title={
             sortOrder === "asc"
               ? t("sortOptions.ascending")

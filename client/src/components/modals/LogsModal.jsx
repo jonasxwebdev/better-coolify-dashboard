@@ -41,7 +41,7 @@ const highlightLog = (log) => {
     },
     {
       regex: /\b(DEBUG|TRACE)\b/gi,
-      className: "text-slate-400 font-bold bg-slate-500/10 px-1 rounded",
+      className: "text-muted-foreground font-bold bg-slate-500/10 px-1 rounded",
     },
     {
       regex: /\b(SUCCESS|OK)\b/gi,
@@ -50,11 +50,11 @@ const highlightLog = (log) => {
     {
       regex:
         /\b(\d{4}-\d{2}-\d{2}[T\s]\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})?)\b/g,
-      className: "text-slate-400 font-mono",
+      className: "text-muted-foreground font-mono",
     },
     {
       regex: /\b(\d{2}:\d{2}:\d{2}(?:\.\d+)?)\b/g,
-      className: "text-slate-400 font-mono",
+      className: "text-muted-foreground font-mono",
     },
     {
       regex: /([/\\][\w\-./\\]+\.\w+)/g,
@@ -100,7 +100,7 @@ const highlightLog = (log) => {
   filteredMatches.forEach((match, idx) => {
     if (match.index > lastIndex) {
       parts.push(
-        <span key={`text-${idx}`} className="text-slate-200">
+        <span key={`text-${idx}`} className="text-foreground">
           {log.substring(lastIndex, match.index)}
         </span>
       );
@@ -115,7 +115,7 @@ const highlightLog = (log) => {
 
   if (lastIndex < log.length) {
     parts.push(
-      <span key="text-end" className="text-slate-200">
+      <span key="text-end" className="text-foreground">
         {log.substring(lastIndex)}
       </span>
     );
@@ -124,7 +124,7 @@ const highlightLog = (log) => {
   return parts.length > 0 ? (
     parts
   ) : (
-    <span className="text-slate-200">{log}</span>
+    <span className="text-foreground">{log}</span>
   );
 };
 
@@ -197,47 +197,47 @@ const LogsModal = ({ name, type, uuid, onClose }) => {
 
   return (
     <div
-      className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4"
+      className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4"
       onClick={handleClose}
     >
       <div
-        className="bg-[#1e1a3c] rounded-xl border border-[#4e3976]/30 max-w-6xl w-full max-h-[80vh] flex flex-col"
+        className="bg-popover rounded-xl border border-border max-w-6xl w-full max-h-[80vh] flex flex-col"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="flex items-center justify-between p-4 border-b border-[#4e3976]/30">
+        <div className="flex items-center justify-between p-4 border-b border-border">
           <div className="flex items-center gap-3">
-            <h3 className="text-lg font-semibold text-white">
+            <h3 className="text-lg font-semibold text-foreground">
               {t("admin.logsTitle", { name })}
             </h3>
             {isLoading && (
-              <span className="flex items-center gap-1.5 text-xs text-blue-400">
-                <span className="w-2 h-2 bg-blue-400 rounded-full animate-pulse"></span>
+              <span className="flex items-center gap-1.5 text-xs text-info">
+                <span className="w-2 h-2 bg-info rounded-full animate-pulse"></span>
                 {t("common.loading")}
               </span>
             )}
             {hasError && (
-              <span className="flex items-center gap-1.5 text-xs text-red-400">
-                <span className="w-2 h-2 bg-red-400 rounded-full"></span>
+              <span className="flex items-center gap-1.5 text-xs text-destructive">
+                <span className="w-2 h-2 bg-destructive rounded-full"></span>
                 {t("admin.logsError")}
               </span>
             )}
           </div>
           <button
             onClick={handleClose}
-            className="text-slate-400 hover:text-white transition cursor-pointer font-bold text-xl"
+            className="text-muted-foreground hover:text-foreground transition cursor-pointer font-bold text-xl"
           >
             &times;
           </button>
         </div>
 
-        <div className="p-4 border-b border-[#4e3976]/30 flex items-center gap-4">
+        <div className="p-4 border-b border-border flex items-center gap-4">
           <div className="flex-1">
             <input
               type="text"
               placeholder={t("admin.filterLogs")}
               value={filter}
               onChange={(e) => setFilter(e.target.value)}
-              className="w-full px-3 py-2 bg-[#100e21] border border-[#4e3976]/30 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:border-purple-500 transition"
+              className="w-full px-3 py-2 bg-background border border-border rounded-lg text-foreground placeholder-muted-foreground focus:outline-none focus:border-ring transition"
             />
           </div>
           <label className="flex items-center gap-2 cursor-pointer">
@@ -245,27 +245,27 @@ const LogsModal = ({ name, type, uuid, onClose }) => {
               type="checkbox"
               checked={autoScroll}
               onChange={(e) => setAutoScroll(e.target.checked)}
-              className="w-4 h-4 accent-purple-500"
+              className="w-4 h-4 accent-primary"
             />
-            <span className="text-sm text-slate-300">
+            <span className="text-sm text-muted-foreground">
               {t("admin.autoScroll")}
             </span>
           </label>
         </div>
 
-        <div className="flex-1 overflow-auto p-4 bg-[#100e21] font-mono text-sm">
+        <div className="flex-1 overflow-auto p-4 bg-background font-mono text-sm">
           {hasError ? (
             <div className="text-center py-8 space-y-4">
-              <p className="text-red-400">{t("admin.logsUnavailable")}</p>
+              <p className="text-destructive">{t("admin.logsUnavailable")}</p>
               <button
                 onClick={handleRetry}
-                className="px-4 py-2 bg-purple-500/20 hover:bg-purple-500/30 border border-purple-500/30 rounded-lg text-purple-300 hover:text-purple-200 transition text-sm cursor-pointer"
+                className="px-4 py-2 bg-secondary hover:bg-accent border border-border rounded-md text-secondary-foreground transition-colors text-sm cursor-pointer"
               >
                 {t("admin.retryConnection")}
               </button>
             </div>
           ) : filteredLogs.length === 0 ? (
-            <div className="text-slate-400 text-center py-8">
+            <div className="text-muted-foreground text-center py-8">
               {filter ? t("admin.noLogsMatch") : t("admin.waitingForLogs")}
             </div>
           ) : (
@@ -273,9 +273,9 @@ const LogsModal = ({ name, type, uuid, onClose }) => {
               {filteredLogs.map((log, index) => (
                 <div
                   key={index}
-                  className="flex hover:bg-[#1e1a3c]/50 transition-colors group"
+                  className="flex hover:bg-accent/50 transition-colors group"
                 >
-                  <span className="text-slate-500 group-hover:text-slate-400 select-none min-w-[4rem] text-right pr-3 transition-colors">
+                  <span className="text-muted-foreground group-hover:text-muted-foreground select-none min-w-[4rem] text-right pr-3 transition-colors">
                     {index + 1}
                   </span>
                   <span className="flex-1 break-all leading-relaxed">
@@ -288,7 +288,7 @@ const LogsModal = ({ name, type, uuid, onClose }) => {
           )}
         </div>
 
-        <div className="p-3 border-t border-[#4e3976]/30 text-xs text-slate-400 text-center">
+        <div className="p-3 border-t border-border text-xs text-muted-foreground text-center">
           {filter
             ? t("admin.logsFiltered", { count: filteredLogs.length })
             : t("admin.logsTotal", { count: filteredLogs.length })}

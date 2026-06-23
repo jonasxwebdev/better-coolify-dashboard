@@ -23,17 +23,17 @@ const CustomDropdown = ({
     <div className={`relative ${className}`}>
       <Listbox value={value} onChange={onChange} disabled={disabled}>
         <div className="relative">
-          <ListboxButton className="relative w-full pl-10 pr-4 py-1.5 bg-white/5 border border-white/10 rounded-lg text-white text-sm focus:outline-none focus:ring-2 focus:ring-purple-500 cursor-pointer hover:bg-white/10 transition text-left">
+          <ListboxButton className="relative w-full pl-10 pr-4 py-1.5 bg-input border border-border rounded-md text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-ring cursor-pointer hover:bg-accent transition-colors text-left">
             {Icon && (
-              <Icon className="w-4 h-4 text-slate-300 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+              <Icon className="w-4 h-4 text-muted-foreground absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
             )}
             <span className="block truncate">
               {selectedOption ? selectedOption.label : placeholder}
             </span>
             <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
               <ChevronDownIcon
-                className="h-4 w-4 text-slate-300"
-                strokeWidth={3}
+                className="h-4 w-4 text-muted-foreground"
+                strokeWidth={2.5}
                 aria-hidden="true"
               />
             </span>
@@ -44,17 +44,17 @@ const CustomDropdown = ({
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <ListboxOptions className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-lg bg-slate-800 border border-white/10 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none text-sm">
+            <ListboxOptions className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-popover border border-border shadow-md focus:outline-none text-sm p-1">
               {options.map((option) => (
                 <ListboxOption
                   key={option.value}
                   className={({ active, selected }) =>
-                    `relative cursor-pointer select-none py-2 pl-3 pr-9 transition-colors ${
+                    `relative cursor-pointer select-none py-1.5 pl-3 pr-9 rounded-sm transition-colors ${
                       active
-                        ? "bg-slate-700 text-white"
+                        ? "bg-accent text-accent-foreground"
                         : selected
-                          ? "bg-slate-700/50 text-white"
-                          : "text-slate-300 hover:bg-slate-700/30"
+                          ? "bg-accent/60 text-popover-foreground"
+                          : "text-popover-foreground hover:bg-accent/60"
                     }`
                   }
                   value={option.value}
@@ -69,7 +69,7 @@ const CustomDropdown = ({
                         {option.label}
                       </span>
                       {selected ? (
-                        <span className="absolute inset-y-0 right-0 flex items-center pr-3 text-purple-400">
+                        <span className="absolute inset-y-0 right-0 flex items-center pr-3 text-primary">
                           <CheckIcon className="h-4 w-4" aria-hidden="true" />
                         </span>
                       ) : null}

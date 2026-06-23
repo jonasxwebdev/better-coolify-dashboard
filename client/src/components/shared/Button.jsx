@@ -4,18 +4,18 @@ import { SOUND_TYPES } from "../../utils/soundUtils";
 
 const VARIANTS = {
   primary:
-    "bg-purple-500/20 hover:bg-purple-500/30 active:bg-purple-500/40 text-purple-200 border-purple-500/40",
+    "bg-primary hover:bg-primary/90 text-primary-foreground border-transparent",
   secondary:
-    "bg-white/5 hover:bg-white/10 active:bg-white/20 text-slate-300 border-white/10",
+    "bg-secondary hover:bg-accent text-secondary-foreground border-border",
   success:
-    "bg-green-500/20 hover:bg-green-500/40 active:bg-green-500/50 text-green-200 border-green-500/40",
+    "bg-success/15 hover:bg-success/25 text-success border-success/30",
   warning:
-    "bg-yellow-500/20 hover:bg-yellow-500/40 active:bg-yellow-500/50 text-yellow-200 border-yellow-500/40",
+    "bg-warning/15 hover:bg-warning/25 text-warning border-warning/30",
   danger:
-    "bg-red-500/20 hover:bg-red-500/40 active:bg-red-500/50 text-red-200 border-red-500/40",
-  info: "bg-blue-500/20 hover:bg-blue-500/40 active:bg-blue-500/50 text-blue-200 border-blue-500/40",
+    "bg-destructive/15 hover:bg-destructive/25 text-destructive border-destructive/30",
+  info: "bg-info/15 hover:bg-info/25 text-info border-info/30",
   indigo:
-    "bg-indigo-500/20 hover:bg-indigo-500/40 active:bg-indigo-500/50 text-indigo-200 border-indigo-500/40",
+    "bg-secondary hover:bg-accent text-secondary-foreground border-border",
 };
 
 const SIZES = {
@@ -51,7 +51,7 @@ const Button = ({
     <button
       onClick={handleClick}
       disabled={disabled}
-      className={`inline-flex items-center gap-1.5 ${sizeClasses} ${variantClasses} rounded-lg border transition font-medium cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed ${className}`}
+      className={`inline-flex items-center gap-1.5 ${sizeClasses} ${variantClasses} rounded-md border transition-colors font-medium cursor-pointer focus:outline-none focus:ring-2 focus:ring-ring disabled:opacity-50 disabled:cursor-not-allowed ${className}`}
       {...props}
     >
       {Icon && <Icon className="w-4 h-4" />}

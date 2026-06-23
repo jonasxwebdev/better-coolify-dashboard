@@ -22,11 +22,11 @@ class ErrorBoundary extends React.Component {
   render() {
     if (this.state.hasError) {
       return (
-        <div className="min-h-screen bg-slate-900 flex items-center justify-center p-4">
-          <div className="max-w-md w-full bg-slate-800 rounded-lg p-8 text-center">
+        <div className="min-h-screen bg-background flex items-center justify-center p-4">
+          <div className="max-w-md w-full bg-card border border-border rounded-lg p-8 text-center">
             <div className="mb-6">
               <svg
-                className="w-16 h-16 text-red-500 mx-auto"
+                className="w-16 h-16 text-destructive mx-auto"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -40,17 +40,17 @@ class ErrorBoundary extends React.Component {
               </svg>
             </div>
 
-            <h1 className="text-2xl font-bold text-white mb-2">
+            <h1 className="text-2xl font-bold text-foreground mb-2">
               Something went wrong
             </h1>
 
-            <p className="text-gray-400 mb-6">
+            <p className="text-muted-foreground mb-6">
               An unexpected error occurred. Please try refreshing the page.
             </p>
 
             {this.state.error && (
-              <div className="bg-slate-900 rounded p-3 mb-6 text-left">
-                <p className="text-xs text-gray-500 font-mono break-all">
+              <div className="bg-background rounded p-3 mb-6 text-left">
+                <p className="text-xs text-muted-foreground font-mono break-all">
                   {this.state.error.toString()}
                 </p>
               </div>
@@ -58,7 +58,7 @@ class ErrorBoundary extends React.Component {
 
             <button
               onClick={this.handleReset}
-              className="w-full bg-purple-600 hover:bg-purple-700 text-white font-medium py-3 px-6 rounded-lg transition-colors"
+              className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-medium py-3 px-6 rounded-md transition-colors cursor-pointer"
             >
               Return to Dashboard
             </button>

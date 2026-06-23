@@ -34,8 +34,8 @@ const ResourceList = ({
 
     return (
       <div className="text-center py-12 md:py-16">
-        <CubeIcon className="w-24 h-24 mx-auto mb-4 text-purple-500/61" />
-        <p className="text-slate-200 text-lg">
+        <CubeIcon className="w-16 h-16 mx-auto mb-4 text-muted-foreground/40" />
+        <p className="text-muted-foreground text-sm">
           {totalCount === 0
             ? `${viewLabel} ${t("dashboard.noResources")}`
             : t("dashboard.noResources")}
@@ -43,14 +43,7 @@ const ResourceList = ({
         {searchTerm && (
           <button
             onClick={handleClearSearch}
-            className="cursor-pointer mt-5 inline-flex items-center justify-center gap-1.5 px-4 py-2
-           bg-gradient-to-r from-purple-500/50 to-purple-600/50
-           text-white text-sm font-semibold
-           rounded-lg shadow-md transform transition-all duration-500
-            hover:from-purple-600/50 hover:to-purple-700/50 hover:shadow-xl
-              active:from-purple-700/50 active:to-purple-800/50
-           active:from-purple-600/50 active:to-purple-700/50
-           disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0 disabled:hover:shadow-md"
+            className="cursor-pointer mt-5 inline-flex items-center justify-center gap-1.5 px-4 py-2 bg-primary hover:bg-primary/90 text-primary-foreground text-sm font-medium rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-ring disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <XMarkIcon className="w-4 h-4" />
             <span>{t("common.search")}</span>
@@ -88,16 +81,16 @@ const ResourceList = ({
   ];
 
   return (
-    <div className="bg-white/2 border border-white/10 rounded-lg overflow-hidden">
+    <div className="bg-card border border-border rounded-lg overflow-hidden">
       {/* Table Header */}
-      <div className="hidden lg:block bg-white/7 border-b text-center border-white/10 px-6 py-3">
-        <div className="grid grid-cols-11 gap-4 text-xs font-medium text-slate-300 uppercase tracking-wider">
+      <div className="hidden lg:block bg-muted/40 border-b text-center border-border px-6 py-3">
+        <div className="grid grid-cols-11 gap-4 text-xs font-medium text-muted-foreground uppercase tracking-wider">
           {columns.map((column) => (
             <div
               key={column.key}
               className={`col-span-${column.span} ${
                 column.hideOnMobile ? "hidden md:block" : ""
-              } ${column.sortable ? "cursor-pointer hover:text-slate-200 transition" : "text-center"}`}
+              } ${column.sortable ? "cursor-pointer hover:text-foreground transition-colors" : "text-center"}`}
               onClick={column.sortable ? () => onSort(column.key) : undefined}
             >
               {column.label}{" "}

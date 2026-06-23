@@ -11,12 +11,24 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes"
     />
-    <meta name="theme-color" content="#1e293b" />
+    <meta name="theme-color" content="#0c0c0f" />
     <meta
       name="description"
       content="Coolify Dashboard - Sunucularınızı yönetin"
     />
     <title>Coolify Dashboard</title>
+    <script>
+      // Apply theme before first paint to avoid a flash. Defaults to dark.
+      (function () {
+        try {
+          var stored = localStorage.getItem("theme");
+          var dark = stored ? stored === "dark" : true;
+          document.documentElement.classList.toggle("dark", dark);
+        } catch (e) {
+          document.documentElement.classList.add("dark");
+        }
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

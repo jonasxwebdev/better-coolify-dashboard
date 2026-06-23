@@ -65,20 +65,20 @@ const DatabaseInfo = ({ resource }) => {
   return (
     <div className="space-y-4">
       {resource.internal_db_url && (
-        <div className="bg-slate-900/50 rounded-lg p-4 border border-purple-500/30">
+        <div className="bg-muted/40 rounded-lg p-4 border border-border">
           <div className="flex items-center justify-between mb-3">
             <div
               className="flex items-center gap-2 cursor-help"
               data-tooltip-id="internal-url-tooltip"
               data-tooltip-content={t("tooltips.internalConnection")}
             >
-              <LockClosedIcon className="w-5 h-5 text-purple-400" />
-              <span className="text-sm font-semibold text-white">
+              <LockClosedIcon className="w-5 h-5 text-muted-foreground" />
+              <span className="text-sm font-semibold text-foreground">
                 {t("resourceCard.internalConnectionAddress")}
               </span>
             </div>
             <span
-              className="text-xs px-2 py-0.5 bg-purple-500/20 text-purple-300 rounded border border-purple-500/30 cursor-help"
+              className="text-xs px-2 py-0.5 bg-secondary text-foreground rounded border border-border cursor-help"
               data-tooltip-id="internal-url-tooltip"
               data-tooltip-content={t("tooltips.internalConnection")}
             >
@@ -86,8 +86,8 @@ const DatabaseInfo = ({ resource }) => {
             </span>
           </div>
 
-          <div className="flex items-center justify-between gap-4 bg-slate-800/50 px-3 py-2 rounded">
-            <span className="flex-1 text-sm text-slate-300 font-mono break-all">
+          <div className="flex items-center justify-between gap-4 bg-secondary px-3 py-2 rounded">
+            <span className="flex-1 text-sm text-muted-foreground font-mono break-all">
               {showInternalUrl
                 ? resource.internal_db_url
                 : "•••••••••••••••••••"}
@@ -99,7 +99,7 @@ const DatabaseInfo = ({ resource }) => {
                   e.stopPropagation();
                   setShowInternalUrl(!showInternalUrl);
                 }}
-                className="p-1.5 text-slate-400 hover:text-white hover:bg-slate-700/50 rounded-lg transition cursor-pointer"
+                className="p-1.5 text-muted-foreground hover:text-foreground hover:bg-secondary rounded-lg transition cursor-pointer"
               >
                 {showInternalUrl ? (
                   <EyeSlashIcon className="w-4 h-4" />
@@ -112,10 +112,10 @@ const DatabaseInfo = ({ resource }) => {
                   e.stopPropagation();
                   handleCopy(resource.internal_db_url, "internal_url");
                 }}
-                className="p-1.5 text-slate-400 hover:text-white hover:bg-slate-700/50 rounded-lg transition cursor-pointer"
+                className="p-1.5 text-muted-foreground hover:text-foreground hover:bg-secondary rounded-lg transition cursor-pointer"
               >
                 {copiedField === "internal_url" ? (
-                  <CheckIcon className="w-4 h-4 text-green-400" />
+                  <CheckIcon className="w-4 h-4 text-success" />
                 ) : (
                   <ClipboardDocumentIcon className="w-4 h-4" />
                 )}
@@ -126,20 +126,20 @@ const DatabaseInfo = ({ resource }) => {
       )}
 
       {resource.external_db_url && (
-        <div className="bg-slate-900/50 rounded-lg p-4 border border-cyan-500/30">
+        <div className="bg-muted/40 rounded-lg p-4 border border-border">
           <div className="flex items-center justify-between mb-3">
             <div
               className="flex items-center gap-2 cursor-help"
               data-tooltip-id="external-url-tooltip"
               data-tooltip-content={t("tooltips.externalConnection")}
             >
-              <ArrowTopRightOnSquareIcon className="w-5 h-5 text-cyan-400" />
-              <span className="text-sm font-semibold text-white">
+              <ArrowTopRightOnSquareIcon className="w-5 h-5 text-muted-foreground" />
+              <span className="text-sm font-semibold text-foreground">
                 {t("resourceCard.externalConnectionAddress")}
               </span>
             </div>
             <span
-              className="text-xs px-2 py-0.5 bg-cyan-500/20 text-cyan-300 rounded border border-cyan-500/30 cursor-help"
+              className="text-xs px-2 py-0.5 bg-secondary text-foreground rounded border border-border cursor-help"
               data-tooltip-id="external-url-tooltip"
               data-tooltip-content={t("tooltips.externalConnection")}
             >
@@ -147,8 +147,8 @@ const DatabaseInfo = ({ resource }) => {
             </span>
           </div>
 
-          <div className="flex items-center justify-between gap-4 bg-slate-800/50 px-3 py-2 rounded">
-            <span className="flex-1 text-sm text-slate-300 font-mono break-all">
+          <div className="flex items-center justify-between gap-4 bg-secondary px-3 py-2 rounded">
+            <span className="flex-1 text-sm text-muted-foreground font-mono break-all">
               {showExternalUrl
                 ? resource.external_db_url
                 : "•••••••••••••••••••"}
@@ -160,7 +160,7 @@ const DatabaseInfo = ({ resource }) => {
                   e.stopPropagation();
                   setShowExternalUrl(!showExternalUrl);
                 }}
-                className="p-1.5 text-slate-400 hover:text-white hover:bg-slate-700/50 rounded-lg transition cursor-pointer"
+                className="p-1.5 text-muted-foreground hover:text-foreground hover:bg-secondary rounded-lg transition cursor-pointer"
               >
                 {showExternalUrl ? (
                   <EyeSlashIcon className="w-4 h-4" />
@@ -173,10 +173,10 @@ const DatabaseInfo = ({ resource }) => {
                   e.stopPropagation();
                   handleCopy(resource.external_db_url, "external_url");
                 }}
-                className="p-1.5 text-slate-400 hover:text-white hover:bg-slate-700/50 rounded-lg transition cursor-pointer"
+                className="p-1.5 text-muted-foreground hover:text-foreground hover:bg-secondary rounded-lg transition cursor-pointer"
               >
                 {copiedField === "external_url" ? (
-                  <CheckIcon className="w-4 h-4 text-green-400" />
+                  <CheckIcon className="w-4 h-4 text-success" />
                 ) : (
                   <ClipboardDocumentIcon className="w-4 h-4" />
                 )}
@@ -190,21 +190,21 @@ const DatabaseInfo = ({ resource }) => {
         className={`grid grid-cols-1 ${password ? "md:grid-cols-2" : "md:grid-cols-3"} gap-4`}
       >
         {password && (
-          <div className="bg-slate-900/50 rounded-lg p-4 border border-amber-500/30">
+          <div className="bg-muted/40 rounded-lg p-4 border border-warning/30">
             <div className="flex items-center justify-between mb-3">
               <div className="flex items-center gap-2">
-                <ShieldCheckIcon className="w-5 h-5 text-amber-400" />
-                <span className="text-sm font-semibold text-white">
+                <ShieldCheckIcon className="w-5 h-5 text-warning" />
+                <span className="text-sm font-semibold text-foreground">
                   {t("resourceCard.databasePassword")}
                 </span>
               </div>
-              <span className="text-xs px-2 py-0.5 bg-amber-500/20 text-amber-300 rounded border border-amber-500/30">
+              <span className="text-xs px-2 py-0.5 bg-warning/15 text-warning rounded border border-warning/30">
                 {t("resourceCard.critical")}
               </span>
             </div>
 
-            <div className="flex items-center justify-between gap-4 bg-slate-800/50 px-3 py-2 rounded">
-              <span className="flex-1 text-sm text-slate-300 font-mono break-all">
+            <div className="flex items-center justify-between gap-4 bg-secondary px-3 py-2 rounded">
+              <span className="flex-1 text-sm text-muted-foreground font-mono break-all">
                 {showPassword ? password : "••••••••••••••••"}
               </span>
 
@@ -214,7 +214,7 @@ const DatabaseInfo = ({ resource }) => {
                     e.stopPropagation();
                     setShowPassword(!showPassword);
                   }}
-                  className="p-1.5 text-slate-400 hover:text-white hover:bg-slate-700/50 rounded-lg transition cursor-pointer"
+                  className="p-1.5 text-muted-foreground hover:text-foreground hover:bg-secondary rounded-lg transition cursor-pointer"
                 >
                   {showPassword ? (
                     <EyeSlashIcon className="w-4 h-4" />
@@ -227,10 +227,10 @@ const DatabaseInfo = ({ resource }) => {
                     e.stopPropagation();
                     handleCopy(password, "password");
                   }}
-                  className="p-1.5 text-slate-400 hover:text-white hover:bg-slate-700/50 rounded-lg transition cursor-pointer"
+                  className="p-1.5 text-muted-foreground hover:text-foreground hover:bg-secondary rounded-lg transition cursor-pointer"
                 >
                   {copiedField === "password" ? (
-                    <CheckIcon className="w-4 h-4 text-green-400" />
+                    <CheckIcon className="w-4 h-4 text-success" />
                   ) : (
                     <ClipboardDocumentIcon className="w-4 h-4" />
                   )}
@@ -241,10 +241,10 @@ const DatabaseInfo = ({ resource }) => {
         )}
 
         <div
-          className={`bg-slate-900/50 rounded-lg p-4 border ${
+          className={`bg-muted/40 rounded-lg p-4 border ${
             resource.backup_configs && resource.backup_configs.length > 0
-              ? "border-green-500/30"
-              : "border-orange-500/30"
+              ? "border-success/30"
+              : "border-warning/30"
           }`}
         >
           <div className="flex items-center justify-between mb-3">
@@ -252,18 +252,18 @@ const DatabaseInfo = ({ resource }) => {
               <ArchiveBoxIcon
                 className={`w-5 h-5 ${
                   resource.backup_configs && resource.backup_configs.length > 0
-                    ? "text-green-400"
-                    : "text-orange-400"
+                    ? "text-success"
+                    : "text-warning"
                 }`}
               />
-              <span className="text-sm font-semibold text-white">
+              <span className="text-sm font-semibold text-foreground">
                 {t("resourceCard.backup")}
               </span>
             </div>
             {(!resource.backup_configs ||
               resource.backup_configs.length === 0) && (
               <span
-                className="text-xs px-2 py-0.5 bg-orange-500/20 text-orange-300 rounded border border-orange-500/30 cursor-help"
+                className="text-xs px-2 py-0.5 bg-warning/15 text-warning rounded border border-warning/30 cursor-help"
                 data-tooltip-id="backup-tooltip"
                 data-tooltip-content={t("tooltips.backupWarning")}
               >
@@ -272,45 +272,45 @@ const DatabaseInfo = ({ resource }) => {
             )}
           </div>
           {resource.backup_configs && resource.backup_configs.length > 0 ? (
-            <div className="inline-flex items-center gap-2 bg-slate-800/50 px-3 py-2 rounded">
-              <CheckCircleIcon className="w-5 h-5 text-green-400" />
-              <span className="text-sm text-green-300">
+            <div className="inline-flex items-center gap-2 bg-secondary px-3 py-2 rounded">
+              <CheckCircleIcon className="w-5 h-5 text-success" />
+              <span className="text-sm text-success">
                 {resource.backup_configs.length} aktif
               </span>
             </div>
           ) : (
             <div
-              className="inline-flex items-center gap-2 bg-slate-800/50 px-3 py-2 rounded cursor-help"
+              className="inline-flex items-center gap-2 bg-secondary px-3 py-2 rounded cursor-help"
               data-tooltip-id="backup-tooltip"
               data-tooltip-content={t("tooltips.backupWarning")}
             >
-              <ExclamationTriangleIcon className="w-5 h-5 text-orange-400" />
-              <span className="text-sm font-mono text-slate-300">
+              <ExclamationTriangleIcon className="w-5 h-5 text-warning" />
+              <span className="text-sm font-mono text-muted-foreground">
                 {t("resourceCard.notConfigured")}
               </span>
             </div>
           )}
         </div>
 
-        <div className="bg-slate-900/50 rounded-lg p-4 border border-white/10">
+        <div className="bg-muted/40 rounded-lg p-4 border border-border">
           <div className="flex items-center gap-2 mb-3">
-            <GlobeAltIcon className="w-5 h-5 text-cyan-400" />
-            <span className="text-sm font-semibold text-white">
+            <GlobeAltIcon className="w-5 h-5 text-muted-foreground" />
+            <span className="text-sm font-semibold text-foreground">
               {t("resourceCard.publicAccess")}
             </span>
           </div>
-          <div className="inline-flex items-center gap-2 bg-slate-800/50 px-3 py-2 rounded">
+          <div className="inline-flex items-center gap-2 bg-secondary px-3 py-2 rounded">
             {resource.is_public ? (
               <>
-                <CheckCircleIcon className="w-5 h-5 text-green-400" />
-                <span className="text-sm text-green-300 font-mono">
+                <CheckCircleIcon className="w-5 h-5 text-success" />
+                <span className="text-sm text-success font-mono">
                   {t("resourceCard.open")}
                 </span>
               </>
             ) : (
               <>
-                <XCircleIcon className="w-5 h-5 text-slate-400" />
-                <span className="text-sm text-slate-300 font-mono">
+                <XCircleIcon className="w-5 h-5 text-muted-foreground" />
+                <span className="text-sm text-muted-foreground font-mono">
                   {t("resourceCard.closed")}
                 </span>
               </>
@@ -318,25 +318,25 @@ const DatabaseInfo = ({ resource }) => {
           </div>
         </div>
 
-        <div className="bg-slate-900/50 rounded-lg p-4 border border-white/10">
+        <div className="bg-muted/40 rounded-lg p-4 border border-border">
           <div className="flex items-center gap-2 mb-3">
-            <ShieldCheckIcon className="w-5 h-5 text-emerald-400" />
-            <span className="text-sm font-semibold text-white">
+            <ShieldCheckIcon className="w-5 h-5 text-success" />
+            <span className="text-sm font-semibold text-foreground">
               {t("resourceCard.sslStatus")}
             </span>
           </div>
-          <div className="inline-flex items-center gap-2 bg-slate-800/50 px-3 py-2 rounded">
+          <div className="inline-flex items-center gap-2 bg-secondary px-3 py-2 rounded">
             {resource.is_public_port_ssl_enabled ? (
               <>
-                <CheckCircleIcon className="w-5 h-5 text-emerald-400" />
-                <span className="text-sm text-emerald-300 font-mono">
+                <CheckCircleIcon className="w-5 h-5 text-success" />
+                <span className="text-sm text-success font-mono">
                   {t("resourceCard.active")}
                 </span>
               </>
             ) : (
               <>
-                <XCircleIcon className="w-5 h-5 text-slate-400" />
-                <span className="text-sm text-slate-300 font-mono">
+                <XCircleIcon className="w-5 h-5 text-muted-foreground" />
+                <span className="text-sm text-muted-foreground font-mono">
                   {t("resourceCard.passive")}
                 </span>
               </>
@@ -351,18 +351,18 @@ const DatabaseInfo = ({ resource }) => {
         resource.limits_memory_swap ||
         resource.limits_memory_reservation ||
         resource.limits_cpuset) && (
-        <div className="bg-slate-900/50 rounded-lg p-4 border border-white/10">
+        <div className="bg-muted/40 rounded-lg p-4 border border-border">
           <div className="flex items-center gap-2 mb-3">
-            <CpuChipIcon className="w-5 h-5 text-indigo-400" />
-            <span className="text-sm font-semibold text-white">
+            <CpuChipIcon className="w-5 h-5 text-muted-foreground" />
+            <span className="text-sm font-semibold text-foreground">
               {t("resourceCard.resourceLimits")}
             </span>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             {resource.limits_cpus && (
-              <div className="bg-slate-800/50 px-3 py-2 rounded">
-                <p className="text-xs text-slate-400 mb-1">CPU Cores</p>
-                <p className="text-sm text-white font-mono">
+              <div className="bg-secondary px-3 py-2 rounded">
+                <p className="text-xs text-muted-foreground mb-1">CPU Cores</p>
+                <p className="text-sm text-foreground font-mono">
                   {resource.limits_cpus === "0"
                     ? t("status.unlimited")
                     : resource.limits_cpus}
@@ -370,9 +370,9 @@ const DatabaseInfo = ({ resource }) => {
               </div>
             )}
             {resource.limits_cpu && (
-              <div className="bg-slate-800/50 px-3 py-2 rounded">
-                <p className="text-xs text-slate-400 mb-1">CPU Limit</p>
-                <p className="text-sm text-white font-mono">
+              <div className="bg-secondary px-3 py-2 rounded">
+                <p className="text-xs text-muted-foreground mb-1">CPU Limit</p>
+                <p className="text-sm text-foreground font-mono">
                   {resource.limits_cpu === "0"
                     ? t("status.unlimited")
                     : resource.limits_cpu}
@@ -380,19 +380,19 @@ const DatabaseInfo = ({ resource }) => {
               </div>
             )}
             {resource.limits_cpuset && (
-              <div className="bg-slate-800/50 px-3 py-2 rounded">
-                <p className="text-xs text-slate-400 mb-1">CPU Set</p>
-                <p className="text-sm text-white font-mono">
+              <div className="bg-secondary px-3 py-2 rounded">
+                <p className="text-xs text-muted-foreground mb-1">CPU Set</p>
+                <p className="text-sm text-foreground font-mono">
                   {resource.limits_cpuset}
                 </p>
               </div>
             )}
             {resource.limits_memory && (
-              <div className="bg-slate-800/50 px-3 py-2 rounded">
-                <p className="text-xs text-slate-400 mb-1">
+              <div className="bg-secondary px-3 py-2 rounded">
+                <p className="text-xs text-muted-foreground mb-1">
                   {t("resourceCard.memoryLimit")}
                 </p>
-                <p className="text-sm text-white font-mono">
+                <p className="text-sm text-foreground font-mono">
                   {resource.limits_memory === "0"
                     ? t("status.unlimited")
                     : resource.limits_memory}
@@ -400,11 +400,11 @@ const DatabaseInfo = ({ resource }) => {
               </div>
             )}
             {resource.limits_memory_swap && (
-              <div className="bg-slate-800/50 px-3 py-2 rounded">
-                <p className="text-xs text-slate-400 mb-1">
+              <div className="bg-secondary px-3 py-2 rounded">
+                <p className="text-xs text-muted-foreground mb-1">
                   {t("resourceCard.swapLimit")}
                 </p>
-                <p className="text-sm text-white font-mono">
+                <p className="text-sm text-foreground font-mono">
                   {resource.limits_memory_swap === "0" ||
                   resource.limits_memory_swap === "-1"
                     ? t("status.unlimited")

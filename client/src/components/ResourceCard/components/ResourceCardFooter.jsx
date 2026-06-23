@@ -36,7 +36,7 @@ const ResourceCardFooter = ({
   };
 
   return (
-    <div className="border-t border-white/10 bg-slate-800/20 px-3 md:px-6 py-3 md:py-4">
+    <div className="border-t border-border bg-muted/20 px-3 md:px-6 py-3 md:py-4">
       <div className="flex flex-row flex-wrap items-center justify-between gap-3">
         {/* Left Side: Go to App & View YAML */}
         <div className="flex flex-wrap items-center justify-center md:justify-start gap-2 md:pl-6">
@@ -44,7 +44,7 @@ const ResourceCardFooter = ({
           {urls.length > 0 && resourceTypeId !== "database" && (
             <button
               onClick={(e) => handleClick(e, () => onUrlClick(urls[0]))}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-indigo-500/20 hover:bg-indigo-500/40 text-indigo-200 hover:text-indigo-100 rounded-lg border border-indigo-500/40 transition text-sm font-medium cursor-pointer"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-secondary hover:bg-accent text-foreground hover:text-foreground rounded-lg border border-border transition text-sm font-medium cursor-pointer"
             >
               <ArrowTopRightOnSquareIcon className="w-4 h-4" />
               <span className="hidden md:inline">{t("resourceCard.goToApp")}</span>
@@ -55,7 +55,7 @@ const ResourceCardFooter = ({
           {(resource.docker_compose || resource.docker_compose_raw) && (
             <button
               onClick={(e) => handleClick(e, onYamlClick)}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-indigo-500/20 hover:bg-indigo-500/40 text-indigo-200 hover:text-indigo-100 rounded-lg border border-indigo-500/40 transition text-sm font-medium cursor-pointer"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-secondary hover:bg-accent text-foreground hover:text-foreground rounded-lg border border-border transition text-sm font-medium cursor-pointer"
             >
               <DocumentTextIcon className="w-4 h-4" />
               <span className="hidden md:inline">{t("resourceCard.viewYaml")}</span>
@@ -71,10 +71,10 @@ const ResourceCardFooter = ({
               <div
                 className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-lg border transition-all duration-300 ${
                   actionColor === "green"
-                    ? "bg-green-500/20 border-green-500/40 text-green-200"
+                    ? "bg-success/15 border-success/30 text-success"
                     : actionColor === "yellow"
-                      ? "bg-yellow-500/20 border-yellow-500/40 text-yellow-200"
-                      : "bg-red-500/20 border-red-500/40 text-red-200"
+                      ? "bg-warning/15 border-warning/30 text-warning"
+                      : "bg-destructive/15 border-destructive/30 text-destructive"
                 }`}
               >
                 <ActionIcon className="w-4 h-4 animate-pulse flex-shrink-0" />
@@ -116,7 +116,7 @@ const ResourceCardFooter = ({
                     <button
                       onClick={(e) => handleClick(e, () => onActionClick("start"))}
                       disabled={!!currentAction}
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-green-500/20 hover:bg-green-500/40 disabled:bg-green-500/10 text-green-200 disabled:text-green-400 rounded-lg border border-green-500/40 transition text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-success/15 hover:bg-success/25 disabled:bg-success/10 text-success disabled:text-success/60 rounded-lg border border-success/30 transition text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
                     >
                       <PlayIcon className="w-4 h-4" />
                       <span className="hidden md:inline">{t("admin.start")}</span>
@@ -129,7 +129,7 @@ const ResourceCardFooter = ({
                     <button
                       onClick={(e) => handleClick(e, () => onActionClick("stop"))}
                       disabled={!!currentAction}
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-yellow-500/20 hover:bg-yellow-500/40 disabled:bg-yellow-500/10 text-yellow-200 disabled:text-yellow-400 rounded-lg border border-yellow-500/40 transition text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-warning/15 hover:bg-warning/25 disabled:bg-warning/10 text-warning disabled:text-warning/60 rounded-lg border border-warning/30 transition text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
                     >
                       <StopIcon className="w-4 h-4" />
                       <span className="hidden md:inline">{t("admin.stop")}</span>
@@ -140,7 +140,7 @@ const ResourceCardFooter = ({
                 {resource.type === RESOURCE_TYPES.APPLICATION && (
                   <button
                     onClick={(e) => handleClick(e, onLogsClick)}
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-blue-500/20 hover:bg-blue-500/40 text-blue-200 hover:text-blue-100 rounded-lg border border-blue-500/40 transition text-sm font-medium cursor-pointer"
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-secondary hover:bg-accent text-foreground hover:text-foreground rounded-lg border border-border transition text-sm font-medium cursor-pointer"
                   >
                     <DocumentTextIcon className="w-4 h-4" />
                     <span className="hidden md:inline">{t("admin.viewLogs")}</span>
@@ -151,7 +151,7 @@ const ResourceCardFooter = ({
                 <button
                   onClick={(e) => handleClick(e, () => onActionClick("delete"))}
                   disabled={!!currentAction}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-red-500/20 hover:bg-red-500/40 disabled:bg-red-500/10 text-red-200 disabled:text-red-400 rounded-lg border border-red-500/40 transition text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-destructive/15 hover:bg-destructive/25 disabled:bg-destructive/10 text-destructive disabled:text-destructive/60 rounded-lg border border-destructive/30 transition text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
                 >
                   <TrashIcon className="w-4 h-4" />
                   <span className="hidden md:inline">{t("admin.delete")}</span>

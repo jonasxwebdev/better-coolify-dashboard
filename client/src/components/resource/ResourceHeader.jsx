@@ -26,13 +26,13 @@ const ResourceHeader = ({
             <div className="w-4 h-4 flex items-center justify-center mt-1">
               {isExpanded ? (
                 <ChevronUpIcon
-                  className="w-4 h-4 text-slate-200 flex-shrink-0"
-                  strokeWidth={3}
+                  className="w-4 h-4 text-muted-foreground flex-shrink-0"
+                  strokeWidth={2.5}
                 />
               ) : (
                 <ChevronDownIcon
-                  className="w-4 h-4 text-slate-200 flex-shrink-0"
-                  strokeWidth={3}
+                  className="w-4 h-4 text-muted-foreground flex-shrink-0"
+                  strokeWidth={2.5}
                 />
               )}
             </div>
@@ -47,11 +47,11 @@ const ResourceHeader = ({
           <div className="flex-1 min-w-0">
             <div className="flex items-start justify-between gap-2 mb-2">
               <div className="flex-1 min-w-0">
-                <h3 className="text-base font-semibold text-white truncate">
+                <h3 className="text-base font-semibold text-foreground truncate">
                   {name}
                 </h3>
                 {sourceInfo && (
-                  <p className="text-xs text-slate-400 truncate flex items-center gap-1 mt-1">
+                  <p className="text-xs text-muted-foreground truncate flex items-center gap-1 mt-1">
                     <span>{sourceInfo.icon}</span>
                     <span className="truncate">
                       {sourceInfo.value
@@ -64,7 +64,7 @@ const ResourceHeader = ({
             </div>
 
             {tag && (
-              <span className="hidden lg:inline-block mt-2 text-xs px-2 py-1 bg-indigo-500/20 text-indigo-300 rounded border border-indigo-500/30">
+              <span className="hidden lg:inline-block mt-2 text-xs px-2 py-1 bg-secondary text-secondary-foreground rounded-md border border-border">
                 {tag}
               </span>
             )}
@@ -78,13 +78,13 @@ const ResourceHeader = ({
             <div className="w-4 h-4 flex items-center justify-center">
               {isExpanded ? (
                 <ChevronUpIcon
-                  className="w-4 h-4 text-slate-200 flex-shrink-0"
-                  strokeWidth={3}
+                  className="w-4 h-4 text-muted-foreground flex-shrink-0"
+                  strokeWidth={2.5}
                 />
               ) : (
                 <ChevronDownIcon
-                  className="w-4 h-4 text-slate-200 flex-shrink-0"
-                  strokeWidth={3}
+                  className="w-4 h-4 text-muted-foreground flex-shrink-0"
+                  strokeWidth={2.5}
                 />
               )}
             </div>
@@ -99,11 +99,11 @@ const ResourceHeader = ({
 
         <div className="col-span-2 flex justify-center">
           <div className="flex flex-col gap-1 items-center w-full px-2">
-            <span className="text-white font-medium truncate block text-sm w-full text-center">
+            <span className="text-foreground font-medium truncate block text-sm w-full text-center">
               {name}
             </span>
             {sourceInfo && (
-              <span className="text-xs text-slate-400 truncate flex items-center gap-1">
+              <span className="text-xs text-muted-foreground truncate flex items-center gap-1">
                 <span>{sourceInfo.icon}</span>
                 <span className="truncate">
                   {sourceInfo.value
@@ -118,11 +118,11 @@ const ResourceHeader = ({
         <div className="col-span-2 flex justify-center">
           {createdAt && (
             <div className="flex flex-col gap-0.5 items-center">
-              <div className="inline-flex items-center gap-1 px-2 py-1 bg-slate-700/50 rounded-md text-xs text-slate-300 border border-slate-600/30">
+              <div className="inline-flex items-center gap-1 px-2 py-1 bg-secondary rounded-md text-xs text-muted-foreground border border-border">
                 <ClockIcon className="w-3 h-3" />
                 <span>{formatDate(createdAt)}</span>
               </div>
-              <span className="text-xs text-slate-300 italic">
+              <span className="text-xs text-muted-foreground italic">
                 {getTimeAgo(createdAt)}
               </span>
             </div>
@@ -132,11 +132,11 @@ const ResourceHeader = ({
         <div className="col-span-2 flex justify-center">
           {updatedAt && (
             <div className="flex flex-col gap-0.5 items-center">
-              <div className="inline-flex items-center gap-1 px-2 py-1 bg-slate-700/50 rounded-md text-xs text-slate-300 border border-slate-600/30">
+              <div className="inline-flex items-center gap-1 px-2 py-1 bg-secondary rounded-md text-xs text-muted-foreground border border-border">
                 <ArrowPathIcon className="w-3 h-3" />
                 <span>{formatDate(updatedAt)}</span>
               </div>
-              <span className="text-xs text-slate-300 italic">
+              <span className="text-xs text-muted-foreground italic">
                 {getTimeAgo(updatedAt)}
               </span>
             </div>
@@ -146,11 +146,11 @@ const ResourceHeader = ({
         <div className="col-span-3 flex justify-center">
           <div className="flex flex-col gap-1.5 items-center">
             <div className="flex items-center gap-2">
-              <ResourceTypeIcon className="w-4 h-4 text-slate-400 flex-shrink-0" />
-              <span className="text-slate-300 text-sm">{type}</span>
+              <ResourceTypeIcon className="w-4 h-4 text-muted-foreground flex-shrink-0" />
+              <span className="text-muted-foreground text-sm">{type}</span>
             </div>
             {tag && (
-              <span className="inline-block min-w-32 truncate text-xs px-2 py-0.5 bg-indigo-500/20 text-indigo-300 rounded border border-indigo-500/30 text-center">
+              <span className="inline-block min-w-32 truncate text-xs px-2 py-0.5 bg-secondary text-secondary-foreground rounded-md border border-border text-center">
                 {tag}
               </span>
             )}

@@ -1,12 +1,12 @@
 export const STATUS_COLORS = {
-  RUNNING: "bg-green-500",
-  HEALTHY: "bg-green-500",
-  ERROR: "bg-red-500",
-  FAILED: "bg-red-500",
-  EXITED: "bg-orange-500",
-  STOPPED: "bg-orange-500",
-  PENDING: "bg-yellow-500",
-  DEFAULT: "bg-gray-500",
+  RUNNING: "bg-success",
+  HEALTHY: "bg-success",
+  ERROR: "bg-destructive",
+  FAILED: "bg-destructive",
+  EXITED: "bg-muted-foreground",
+  STOPPED: "bg-muted-foreground",
+  PENDING: "bg-warning",
+  DEFAULT: "bg-muted-foreground",
 };
 
 export const getStatusColor = (status) => {

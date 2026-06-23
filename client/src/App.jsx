@@ -17,8 +17,8 @@ const PrivateRoute = ({ children }) => {
 };
 
 const LoadingSpinner = () => (
-  <div className="min-h-screen bg-slate-900 flex items-center justify-center">
-    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-500"></div>
+  <div className="min-h-screen bg-background flex items-center justify-center">
+    <div className="animate-spin rounded-full h-10 w-10 border-2 border-muted border-t-primary"></div>
   </div>
 );
 
@@ -53,43 +53,34 @@ const App = () => {
             toastOptions={{
               duration: 4000,
               style: {
-                borderRadius: "0.5rem",
-                padding: "1rem 1.25rem",
-                fontSize: "0.95rem",
+                borderRadius: "var(--radius)",
+                padding: "0.875rem 1rem",
+                fontSize: "0.875rem",
                 fontWeight: "500",
+                background: "hsl(var(--popover))",
+                color: "hsl(var(--popover-foreground))",
+                border: "1px solid hsl(var(--border))",
                 boxShadow:
-                  "0 20px 25px -5px rgba(0, 0, 0, 0.15), 0 10px 10px -5px rgba(0, 0, 0, 0.08)",
-                minWidth: "320px",
+                  "0 4px 12px -2px rgba(0, 0, 0, 0.25)",
+                minWidth: "300px",
                 maxWidth: "420px",
               },
               success: {
-                style: {
-                  background: "linear-gradient(135deg, #10b981 0%, #059669 100%)",
-                  color: "#ffffff",
-                },
                 iconTheme: {
-                  primary: "#ffffff",
-                  secondary: "#10b981",
+                  primary: "hsl(var(--success))",
+                  secondary: "hsl(var(--popover))",
                 },
               },
               error: {
-                style: {
-                  background: "linear-gradient(135deg, #ef4444 0%, #dc2626 100%)",
-                  color: "#ffffff",
-                },
                 iconTheme: {
-                  primary: "#ffffff",
-                  secondary: "#ef4444",
+                  primary: "hsl(var(--destructive))",
+                  secondary: "hsl(var(--popover))",
                 },
               },
               loading: {
-                style: {
-                  background: "linear-gradient(135deg, #a855f7 0%, #9333ea 100%)",
-                  color: "#ffffff",
-                },
                 iconTheme: {
-                  primary: "#ffffff",
-                  secondary: "#a855f7",
+                  primary: "hsl(var(--primary))",
+                  secondary: "hsl(var(--popover))",
                 },
               },
             }}

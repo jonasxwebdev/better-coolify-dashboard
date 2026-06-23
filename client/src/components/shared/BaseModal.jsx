@@ -30,23 +30,23 @@ const BaseModal = ({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60"
       onClick={onClose}
       role="dialog"
       aria-modal="true"
       aria-labelledby={title ? "modal-title" : undefined}
     >
       <div
-        className={`bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl shadow-2xl border border-white/10 w-full ${maxWidth} max-h-[90vh] overflow-auto`}
+        className={`bg-popover rounded-xl shadow-lg border border-border w-full ${maxWidth} max-h-[90vh] overflow-auto`}
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
         {(title || showCloseButton) && (
-          <div className="flex items-center justify-between p-6 border-b border-white/10 sticky top-0 bg-slate-900/95 backdrop-blur-sm z-10">
+          <div className="flex items-center justify-between p-6 border-b border-border sticky top-0 bg-popover z-10">
             {title && (
               <h2
                 id="modal-title"
-                className="text-xl font-bold text-white flex items-center gap-2"
+                className="text-xl font-bold text-foreground flex items-center gap-2"
               >
                 {title}
               </h2>
@@ -54,7 +54,7 @@ const BaseModal = ({
             {showCloseButton && (
               <button
                 onClick={onClose}
-                className="p-2 hover:bg-white/10 rounded-lg transition text-slate-400 hover:text-white"
+                className="p-2 hover:bg-accent rounded-lg transition text-muted-foreground hover:text-foreground"
                 aria-label="Close modal"
               >
                 <XMarkIcon className="w-6 h-6" />
