@@ -7,8 +7,7 @@ import {
 import LanguageSelector from "../../components/LanguageSelector";
 import ThemeToggle from "../../components/ThemeToggle";
 import ResourceFilters from "./components/ResourceFilters";
-import ResourceList from "./components/ResourceList";
-import ResourceTabs from "./components/ResourceTabs";
+import ServerGroup from "./components/ServerGroup";
 import { SOUND_TYPES } from "../../utils/soundUtils";
 import { logout } from "../../api/auth";
 import toast from "react-hot-toast";
@@ -24,21 +23,17 @@ const Dashboard = () => {
 
   const {
     searchTerm,
-    activeView,
     sortBy,
     sortOrder,
     isRefreshing,
     isInitialLoad,
     loading,
     error,
-    filteredResources,
-    resourceCounts,
+    serverGroups,
     setSearchTerm,
-    setActiveView,
     setSortBy,
     setSortOrder,
     handleRefresh,
-    handleSort,
     handleClearSort,
   } = useDashboardState();
 
@@ -121,15 +116,8 @@ const Dashboard = () => {
 
         {/* Controls Section */}
         <div className="mb-4 md:mb-6">
-          {/* Tabs + Refresh Button */}
-          <div className="flex items-center justify-between mb-4 flex-wrap gap-3 md:gap-4">
-            <ResourceTabs
-              activeView={activeView}
-              onViewChange={setActiveView}
-              applicationsCount={resourceCounts.applications}
-              servicesCount={resourceCounts.services}
-              databasesCount={resourceCounts.databases}
-            />
+          {/* Refresh Button */}
+          <div className="flex items-center justify-end mb-4">
             <button
               onClick={handleRefresh}
               disabled={isRefreshing}
@@ -156,17 +144,21 @@ const Dashboard = () => {
           />
         </div>
 
-        {/* Resource List */}
-        <ResourceList
-          resources={filteredResources}
-          sortBy={sortBy}
-          sortOrder={sortOrder}
-          onSort={handleSort}
-          activeView={activeView}
-          totalResourcesByType={resourceCounts}
-          searchTerm={searchTerm}
-          onClearSearch={() => setSearchTerm("")}
-        />
+        {/* Grouped by server */}
+        {serverGroups.length === 0 ? (
+          <div className="text-center py-12 md:py-16">
+            <p className="text-muted-foreground text-sm">
+              {t("dashboard.noResources")}
+            </p>
+          </div>
+        ) : (
+          serverGroups.map((group) => (
+            <ServerGroup
+              key={group.server.uuid || group.server.name}
+              group={group}
+            />
+          ))
+        )}
       </div>
 
       {/* Footer */}

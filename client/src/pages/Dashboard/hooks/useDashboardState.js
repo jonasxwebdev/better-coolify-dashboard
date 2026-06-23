@@ -2,8 +2,10 @@ import { useState, useEffect, useMemo } from "react";
 import useResourceStore from "../../../store/resourceStore";
 import {
   filterDashboardResources,
-  filterAndSortResources,
+  searchResources,
+  sortResources,
 } from "../../../services/resourceService";
+import { groupByServer } from "../../../services/serverGrouping";
 
 const useDashboardState = () => {
   const {
@@ -21,7 +23,6 @@ const useDashboardState = () => {
   } = useResourceStore();
 
   const [searchTerm, setSearchTerm] = useState("");
-  const [activeView, setActiveView] = useState("applications");
   const [sortBy, setSortBy] = useState("name");
   const [sortOrder, setSortOrder] = useState("asc");
   const [isRefreshing, setIsRefreshing] = useState(false);
@@ -56,16 +57,21 @@ const useDashboardState = () => {
     [applications, services, databases]
   );
 
-  const filteredResources = useMemo(
-    () =>
-      filterAndSortResources(
-        allResources,
-        activeView,
-        searchTerm,
-        sortBy,
-        sortOrder
-      ),
-    [allResources, activeView, searchTerm, sortBy, sortOrder]
+  // Search filters resources across all servers; sort runs before grouping so
+  // order is preserved within each type bucket (groupByServer filters, not sorts).
+  const searchedResources = useMemo(
+    () => searchResources(allResources, searchTerm),
+    [allResources, searchTerm]
+  );
+
+  const sortedResources = useMemo(
+    () => sortResources(searchedResources, sortBy, sortOrder),
+    [searchedResources, sortBy, sortOrder]
+  );
+
+  const serverGroups = useMemo(
+    () => groupByServer(sortedResources, servers, deployments),
+    [sortedResources, servers, deployments]
   );
 
   const handleRefresh = async () => {
@@ -93,7 +99,6 @@ const useDashboardState = () => {
 
   return {
     searchTerm,
-    activeView,
     sortBy,
     sortOrder,
     isRefreshing,
@@ -101,12 +106,7 @@ const useDashboardState = () => {
     loading,
     error,
 
-    applications,
-    services,
-    databases,
-    servers,
-    deployments,
-    filteredResources,
+    serverGroups,
 
     resourceCounts: {
       applications: applications.length,
@@ -115,7 +115,6 @@ const useDashboardState = () => {
     },
 
     setSearchTerm,
-    setActiveView,
     setSortBy,
     setSortOrder,
     handleRefresh,
