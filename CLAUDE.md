@@ -42,6 +42,18 @@ MIT, original copyright Burak Kalaycı (2025). **Keep the `LICENSE` file and its
 
 ## Primary goal for this fork
 
+> **Update (2026-06-23):** Shipped a **"group by server"** view that *replaces* the
+> type-tabbed flat list — server sections → type sub-sections (Applications /
+> Services / Databases) → the existing full-detail resource cards, with per-card
+> deployment/runtime stats (`git_commit_sha`, `last_online_at`, `last_restart_at`,
+> `restart_count`) and a per-server rollup (running/stopped/deploying + health
+> dot). Resources are linked to their server by uuid (`destination.server` for
+> apps/dbs, `server`/`server_id` for services) joined to `/api/v1/servers`. Live
+> "deploying" badge comes from `/api/v1/deployments`. See
+> `docs/superpowers/specs/2026-06-23-group-by-server-design.md` and
+> `docs/superpowers/plans/2026-06-23-group-by-server.md`. The "group by project"
+> idea below is **deferred**.
+
 Add a **"group by Coolify project"** view alongside the existing "group by resource type" view.
 
 Known constraints:
